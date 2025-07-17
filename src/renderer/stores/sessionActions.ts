@@ -272,6 +272,7 @@ export function refreshContextAndCreateNewThread(sessionId: string) {
 export function startNewThread() {
   const store = getDefaultStore()
   const sessionId = store.get(atoms.currentSessionIdAtom)
+  if (!sessionId) return
   refreshContextAndCreateNewThread(sessionId)
   // 自动滚动到底部并自动聚焦到输入框
   setTimeout(() => {
@@ -1058,7 +1059,7 @@ export function initEmptyChatSession(): Omit<Session, 'id'> {
   const settings = store.get(atoms.settingsAtom)
   const chatSessionSettings = store.get(atoms.chatSessionSettingsAtom)
   const newSession: Omit<Session, 'id'> = {
-    name: 'Untitled',
+    name: '新会话',
     type: 'chat',
     messages: [],
     settings: {
@@ -1083,7 +1084,7 @@ export function initEmptyPictureSession(): Omit<Session, 'id'> {
   const store = getDefaultStore()
   const pictureSessionSettings = store.get(atoms.pictureSessionSettingsAtom)
   return {
-    name: 'Untitled',
+    name: '新会话',
     type: 'picture',
     messages: [createMessage('system', i18n.t('Image Creator Intro') || '')],
     settings: {

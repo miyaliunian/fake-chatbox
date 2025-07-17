@@ -35,7 +35,7 @@ export default function Header() {
     if (!autoGenerateTitle) {
       return
     }
-    if (currentSession.name === 'Untitled' && currentSession.messages.length >= 2) {
+    if (currentSession.name === '新会话' && currentSession.messages.length >= 2) {
       sessionActions.generateNameAndThreadName(currentSession.id)
       return // 生成了会话名称，就不再生成 thread 名称
     }
@@ -123,7 +123,7 @@ export default function Header() {
               showSidebar ? 'ml-3' : 'ml-1'
             )}
           >
-            {currentSession?.name}
+            {currentSession?.name || '新会话'}
           </Typography>
           {isSmallScreen ? (
             <MiniButton

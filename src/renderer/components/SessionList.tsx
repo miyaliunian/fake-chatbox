@@ -32,6 +32,7 @@ export interface Props {
 
 export default function SessionList(props: Props) {
   const sortedSessions = useAtomValue(atoms.sortedSessionsListAtom)
+
   const sensors = useSensors(
     useSensor(TouchSensor, {
       activationConstraint: {

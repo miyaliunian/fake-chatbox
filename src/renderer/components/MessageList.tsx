@@ -30,6 +30,8 @@ export default function MessageList(props: { className?: string; currentSession:
   const isSmallScreen = useIsSmallScreen()
 
   const currentMessageList = useAtomValue(atoms.currentMessageListAtom)
+  // 过滤掉系统提示词，对用户隐藏
+  const filteredMessageList = currentMessageList.filter((msg) => msg.role !== 'system')
   const currentThreadHash = useAtomValue(atoms.currentThreadHistoryHashAtom)
   const virtuoso = useRef<VirtuosoHandle>(null)
   const messageListRef = useRef<HTMLDivElement>(null)
@@ -75,7 +77,7 @@ export default function MessageList(props: { className?: string; currentSession:
     <div className={cn('w-full h-full mx-auto', props.className)}>
       <div className="overflow-auto h-full pr-0 pl-1 sm:pl-0" ref={messageListRef}>
         <Virtuoso
-          data={currentMessageList}
+          data={filteredMessageList}
           atTopStateChange={setAtTop}
           atBottomStateChange={setAtBottom}
           ref={virtuoso}
@@ -87,7 +89,7 @@ export default function MessageList(props: { className?: string; currentSession:
                 initialScrollTop: sessionScrollPositionCache.get(currentSession.id)?.scrollTop,
               }
             : {
-                initialTopMostItemIndex: currentMessageList.length - 1,
+                initialTopMostItemIndex: filteredMessageList.length - 1,
               })}
           increaseViewportBy={{ top: 2000, bottom: 2000 }}
           itemContent={(index, msg) => {
@@ -102,8 +104,8 @@ export default function MessageList(props: { className?: string; currentSession:
                   sessionId={currentSession.id}
                   sessionType={currentSession.type || 'chat'}
                   className={index === 0 ? 'pt-4' : ''}
-                  collapseThreshold={msg.role === 'system' ? 150 : undefined}
-                  preferCollapsedCodeBlock={index < currentMessageList.length - 10}
+                  collapseThreshold={undefined}
+                  preferCollapsedCodeBlock={index < filteredMessageList.length - 10}
                 />
                 {currentSession.messageForksHash?.[msg.id] && (
                   <ForkNav msgId={msg.id} forks={currentSession.messageForksHash?.[msg.id]} />
@@ -115,11 +117,11 @@ export default function MessageList(props: { className?: string; currentSession:
             // biome-ignore lint/nursery/noNestedComponentDefinitions: todo
             Footer: () =>
               isSmallScreen &&
-              currentMessageList &&
-              currentMessageList.filter((m) => m.role !== 'system').length > 0 && (
+              filteredMessageList &&
+              filteredMessageList.length > 0 && (
                 <Flex justify="center" align="center" gap="sm" mx="xs" pt="xxs" pb="sm">
                   <Box h="0.5px" bg="chatbox-border-primary" flex={1} />
-                  {currentThreadHash[currentMessageList[currentMessageList.length - 1].id] ? (
+                  {currentThreadHash[filteredMessageList[filteredMessageList.length - 1].id] ? (
                     <Button
                       leftSection={<IconArrowBackUp size={16} />}
                       classNames={{

@@ -14,7 +14,7 @@ import { ImageInStorage } from '@/components/Image'
 import { useIsSmallScreen } from '@/hooks/useScreenChange'
 import { cn } from '@/lib/utils'
 import * as sessionActions from '@/stores/sessionActions'
-import { removeSession, saveSession } from '@/stores/sessionStorageMutations'
+import { getSession, removeSession, saveSession } from '@/stores/sessionStorageMutations'
 import { ConfirmDeleteMenuItem } from './ConfirmDeleteButton'
 import StyledMenu from './StyledMenu'
 
@@ -26,6 +26,7 @@ export interface Props {
 function _SessionItem(props: Props) {
   const { session, selected } = props
   const { t } = useTranslation()
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -77,9 +78,10 @@ function _SessionItem(props: Props) {
             )}
           </IconButton>
         </ListItemIcon>
+        {/* ------------会话名称 ------------ */}
         <ListItemText>
           <Typography variant="inherit" noWrap>
-            {session.name}
+            {session.name || '新会话'}
           </Typography>
         </ListItemText>
         <span
@@ -92,6 +94,7 @@ function _SessionItem(props: Props) {
           </IconButton>
         </span>
       </MenuItem>
+      {/* 编辑、复制、星标、删除 */}
       <StyledMenu
         MenuListProps={{
           'aria-labelledby': 'long-button',
@@ -103,9 +106,13 @@ function _SessionItem(props: Props) {
         <MenuItem
           key={`${session.id}edit`}
           onClick={() => {
-            NiceModal.show('session-settings', {
-              session: session,
-            })
+            // 获取完整的Session对象，因为SessionMeta不包含messages字段
+            const fullSession = getSession(session.id)
+            if (fullSession) {
+              NiceModal.show('session-settings', {
+                session: fullSession,
+              })
+            }
             handleMenuClose()
           }}
           disableRipple
@@ -165,5 +172,13 @@ function _SessionItem(props: Props) {
 export default function Session(props: Props) {
   return useMemo(() => {
     return <_SessionItem {...props} />
-  }, [props.session, props.selected])
+  }, [
+    props.session.id,
+    props.session.name,
+    props.session.starred,
+    props.session.assistantAvatarKey,
+    props.session.picUrl,
+    props.session.type,
+    props.selected,
+  ])
 }

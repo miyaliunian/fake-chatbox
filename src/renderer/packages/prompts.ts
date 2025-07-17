@@ -10,12 +10,12 @@ export function nameConversation(msgs: Message[], language: string): Message[] {
       contentParts: [
         {
           type: 'text',
-          text: `Based on the chat history, give this conversation a name.
-Keep it short - 10 characters max, no quotes.
-Use ${language}.
-Just provide the name, nothing else.
+          text: `根据聊天记录，给这个对话起一个名字。
+要求简短 - 最多10个字符，不要引号。
+使用${language}。
+只提供名字，不要其他内容。
 
-Here's the conversation:
+以下是对话内容：
 
 \`\`\`
 ${
@@ -23,11 +23,10 @@ ${
 }
 \`\`\`
 
-Name this conversation in 10 characters or less.
-Use ${language}.
-Only give the name, nothing else.
+用${language}给这个对话起一个10个字符以内的名字。
+只给出名字，不要其他内容。
 
-The name is:`,
+名字是：`,
         },
       ],
     },

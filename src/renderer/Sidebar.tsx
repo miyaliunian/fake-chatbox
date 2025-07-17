@@ -106,9 +106,9 @@ export default function Sidebar(props: {}) {
                 </IconButton>
               </Box>
             </Box>
-
+            {/* 会话列表 --- begin */}
             <SessionList sessionListRef={sessionListRef} />
-
+            {/* 会话列表 --- end */}
             <Divider variant="fullWidth" />
 
             <Box sx={isSmallScreen ? {} : { marginBottom: '20px' }}>

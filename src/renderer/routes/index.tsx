@@ -69,14 +69,16 @@ function Index() {
   const { copilots: remoteCopilots } = useRemoteCopilots()
   const selectedCopilotId = useMemo(() => session?.copilotId, [session?.copilotId])
   const selectedCopilot = useMemo(
-    () => myCopilots.find((c) => c.id === selectedCopilotId) || remoteCopilots.find((c) => c.id === selectedCopilotId),
+    () =>
+      myCopilots.find((c: CopilotDetail) => c.id === selectedCopilotId) ||
+      remoteCopilots.find((c: CopilotDetail) => c.id === selectedCopilotId),
     [myCopilots, remoteCopilots, selectedCopilotId]
   )
   useEffect(() => {
     setSession((old) => ({
       ...old,
       picUrl: selectedCopilot?.picUrl,
-      name: selectedCopilot?.name || 'Untitled',
+      name: selectedCopilot?.name || '新会话',
       messages: selectedCopilot
         ? [
             {
@@ -153,7 +155,7 @@ function Index() {
           {session.copilotId ? (
             <Stack mx="md" gap="sm">
               <Flex align="center" gap="sm">
-                <CopilotItem name={session.name} picUrl={session.picUrl} selected />
+                <CopilotItem name={session.name || '新会话'} picUrl={session.picUrl} selected />
                 <ActionIcon
                   size={32}
                   radius={16}
@@ -226,7 +228,7 @@ const CopilotPicker = ({ selectedId, onSelect }: { selectedId?: string; onSelect
             ...myCopilots,
             ...(myCopilots.length && remoteCopilots.length ? [undefined] : []),
             ...remoteCopilots
-              .filter((c) => !myCopilots.map((mc) => mc.id).includes(c.id))
+              .filter((c: CopilotDetail) => !myCopilots.map((mc: CopilotDetail) => mc.id).includes(c.id))
               .slice(0, MAX_COPILOTS_TO_SHOW - myCopilots.length - 1),
           ],
     [myCopilots, remoteCopilots]
