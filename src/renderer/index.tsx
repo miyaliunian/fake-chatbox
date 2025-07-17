@@ -1,5 +1,5 @@
 import '@mantine/core/styles.css'
-import * as Sentry from '@sentry/react'
+// import * as Sentry from '@sentry/react'
 import { RouterProvider } from '@tanstack/react-router'
 import { useAtomValue } from 'jotai'
 import { StrictMode, useState } from 'react'
@@ -23,7 +23,7 @@ const log = getLogger('index')
 import './setup/load_polyfill'
 
 // Sentry 初始化
-import './setup/sentry_init'
+// import './setup/sentry_init'
 
 // 全局错误处理
 import './setup/global_error_handler'
@@ -54,7 +54,7 @@ async function initializeApp() {
     log.info('migrate done')
   } catch (e) {
     log.error('migrate error', e)
-    Sentry.captureException(e as Error)
+    // Sentry.captureException(e as Error)
   }
 
   try {
@@ -64,7 +64,7 @@ async function initializeApp() {
     log.info('init data done')
   } catch (e) {
     log.error('init data error', e)
-    Sentry.captureException(e as Error)
+    // Sentry.captureException(e as Error)
   }
 
   // 最后执行 storage 清理，清理不 block 进入UI
@@ -123,7 +123,7 @@ root.render(
 initializeApp()
   .catch((e) => {
     // 初始化中的各个步骤已经捕获了错误，这里防止未来添加未捕获的逻辑
-    Sentry.captureException(e)
+    // Sentry.captureException(e)
     log.error('initializeApp error', e)
   })
   .finally(() => {

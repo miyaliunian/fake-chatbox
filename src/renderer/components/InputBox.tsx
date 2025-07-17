@@ -341,7 +341,9 @@ const InputBox = forwardRef<InputBoxRef, InputBoxProps>(
         // 保持默认的粘贴行为，这时候会粘贴从文档中复制的文本和图片。我认为应该保留图片，因为文档中的表格、图表等图片信息也很重要，很难通过文本格式来表述。
         // 仅在只粘贴图片或文件时阻止默认行为，防止插入文件或图片的名字
         let hasText = false
-        for (const item of event.clipboardData.items) {
+        const items = event.clipboardData.items
+        for (let i = 0; i < items.length; i++) {
+          const item = items[i]
           if (item.kind === 'file') {
             // 插入文件和图片
             const file = item.getAsFile()
@@ -353,13 +355,13 @@ const InputBox = forwardRef<InputBoxRef, InputBoxProps>(
           hasText = true
           if (item.kind === 'string' && item.type === 'text/plain') {
             // 插入链接：如果复制的是链接，则插入链接
-            item.getAsString((text) => {
+            item.getAsString((text: string) => {
               const raw = text.trim()
               if (raw.startsWith('http://') || raw.startsWith('https://')) {
                 const urls = raw
                   .split(/\s+/)
-                  .map((url) => url.trim())
-                  .filter((url) => url.startsWith('http://') || url.startsWith('https://'))
+                  .map((url: string) => url.trim())
+                  .filter((url: string) => url.startsWith('http://') || url.startsWith('https://'))
                 insertLinks(urls)
               }
               if (pasteLongTextAsAFile && raw.length > 3000) {
@@ -738,8 +740,8 @@ const InputBox = forwardRef<InputBoxRef, InputBoxProps>(
 
               <ActionIcon
                 disabled={disableSubmit && !generating}
-                radius={variant === 'centered' ? 24 : 18}
-                size={variant === 'centered' ? (isSmallScreen ? 36 : 48) : isSmallScreen ? 28 : 36}
+                radius={variant === 'centered' ? 18 : 14}
+                size={variant === 'centered' ? (isSmallScreen ? 28 : 36) : isSmallScreen ? 22 : 28}
                 onClick={generating ? onStopGenerating : () => handleSubmit()}
                 className={
                   disableSubmit && !generating
@@ -748,9 +750,9 @@ const InputBox = forwardRef<InputBoxRef, InputBoxProps>(
                 }
               >
                 {generating ? (
-                  <IconPlayerStopFilled size={variant === 'centered' ? 24 : 20} />
+                  <IconPlayerStopFilled size={variant === 'centered' ? 18 : 16} />
                 ) : (
-                  <IconArrowUp size={variant === 'centered' ? 24 : 20} />
+                  <IconArrowUp size={variant === 'centered' ? 18 : 16} />
                 )}
               </ActionIcon>
             </Flex>
