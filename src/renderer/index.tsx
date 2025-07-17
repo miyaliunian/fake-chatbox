@@ -16,6 +16,7 @@ import { initLogAtom, migrationProcessAtom } from './stores/atoms/utilAtoms'
 import * as migration from './stores/migration'
 import { CHATBOX_BUILD_PLATFORM, CHATBOX_BUILD_TARGET } from './variables'
 import '@mantine/spotlight/styles.css'
+import CircularProgress from '@mui/material/CircularProgress'
 
 const log = getLogger('index')
 
@@ -29,7 +30,7 @@ import './setup/load_polyfill'
 import './setup/global_error_handler'
 
 // GA4 初始化
-import './setup/ga_init'
+// import './setup/ga_init'
 
 // 引入保护代码
 import './setup/protect'
@@ -71,7 +72,7 @@ async function initializeApp() {
   import('./setup/storage_clear')
 
   // 启动mcp服务器
-  import('./setup/mcp_bootstrap')
+  // import('./setup/mcp_bootstrap')
 }
 
 // ==========渲染节点==============
@@ -83,10 +84,12 @@ function InitPage() {
   return (
     <div className={cn('flex flex-col justify-center items-center', showLoadingLog ? 'pt-3' : 'h-80')}>
       <div className={cn('flex flex-col items-center', showLoadingLog ? 'hidden' : '')}>
-        <h1 className="font-roboto font-bold text-3xl m-0">Chatbox</h1>
-        <p className="font-roboto font-normal opacity-40">
-          {migrationProcess ? `Migrating...(${migrationProcess})` : 'loading...'}
-        </p>
+        {/* <h1 className="font-roboto font-bold text-3xl m-0">Chatbox</h1> */}
+        <h1 className="font-roboto font-bold text-3xl m-0">算大师</h1>
+        <CircularProgress />
+        {/* <p className="font-roboto font-normal opacity-40">
+          {migrationProcess ? `迁移中...(${migrationProcess})` : '启动中...'}
+        </p> */}
       </div>
       <div className="mt-4">
         <div
@@ -105,7 +108,7 @@ function InitPage() {
         </div>
       </div>
       {/* 倒叙展示，能够看到最新的日志 */}
-      {showLoadingLog && <pre className="whitespace-pre-wrap">{[...log].reverse().join('\n')}</pre>}
+      {/* {showLoadingLog && <pre className="whitespace-pre-wrap">{[...log].reverse().join('\n')}</pre>} */}
     </div>
   )
 }
@@ -140,4 +143,5 @@ initializeApp()
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals()
+// 不需要性能监控
+// reportWebVitals()

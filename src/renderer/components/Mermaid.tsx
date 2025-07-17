@@ -10,6 +10,7 @@ import DataObjectIcon from '@mui/icons-material/DataObject'
 import * as toastActions from '../stores/toastActions'
 import { useTranslation } from 'react-i18next'
 import * as picUtils from '@/packages/pic_utils'
+import CircularProgress from '@mui/material/CircularProgress'
 
 export function MessageMermaid(props: { source: string; theme: 'light' | 'dark'; generating?: boolean }) {
   const { source, theme, generating } = props
@@ -43,7 +44,8 @@ export function Loading() {
   return (
     <div className="inline-flex items-center gap-2 border border-solid border-gray-500 rounded-md p-2 my-2">
       <ChartBarStacked size={30} strokeWidth={1} />
-      <span>Loading...</span>
+      {/* <span>加载...</span> */}
+      <CircularProgress />
     </div>
   )
 }

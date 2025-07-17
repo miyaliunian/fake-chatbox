@@ -2,7 +2,7 @@
  * @Author: 逗逗飞 wufei@strongdata.com.cn
  * @Date: 2025-07-16 11:16:27
  * @LastEditors: 逗逗飞 wufei@strongdata.com.cn
- * @LastEditTime: 2025-07-16 16:50:17
+ * @LastEditTime: 2025-07-17 17:25:00
  * @FilePath: /chatbox/src/renderer/index.ejs
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -78,6 +78,21 @@
     html[data-theme='dark'] .loading-text-color {
       color: #fff;
     }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    html[data-theme='dark'] #loading-spinner div {
+      border-color: #444;
+      border-top-color: #3498db;
+    }
   </style>
 </head>
 
@@ -87,9 +102,11 @@
       <h1 style="font-family: 'Roboto', sans-serif; font-weight: 700; margin: 0" class="loading-text-color">
         算大师
       </h1>
-      <p style="font-family: 'Roboto', sans-serif; font-weight: 400; opacity: 0.4" class="loading-text-color">
-        loading...
-      </p>
+      <div id="loading-spinner" style="margin-top: 20px;">
+        <div
+          style="width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; animation: spin 1s linear infinite;">
+        </div>
+      </div>
     </div>
   </div>
   <!--
