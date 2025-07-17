@@ -37,6 +37,9 @@ function Index() {
     ...initEmptyChatSession(),
   })
 
+  // 添加状态来跟踪是否有用户交互
+  const [hasInteracted, setHasInteracted] = useState(false)
+
   // 理论上 initEmptyChatSession 的时候就已经读取了chatSessionSettingsAtom的值了，但是由于atom是异步的，冷启动的时候大概率会拿到一个空值，所以这里再设置一次
   useEffect(() => {
     setSession((old) => ({
@@ -144,68 +147,148 @@ function Index() {
   return (
     <Page title="">
       <div className="p-0 flex flex-col h-full">
-        <Stack align="center" justify="center" gap="sm" flex={1}>
-          <HomepageIcon className="h-8" />
-          <Text fw="600" size={isSmallScreen ? 'sm' : 'md'}>
-            {t('What can I help you with today?')}
-          </Text>
-        </Stack>
+        {!hasInteracted ? (
+          // 默认居中布局
+          <div className="flex flex-col justify-center items-center h-full px-4 transition-all duration-300 ease-in-out">
+            <Stack align="center" justify="center" gap={isSmallScreen ? 'lg' : 'xl'} className="w-full max-w-2xl">
+              <Stack align="center" gap="sm">
+                <HomepageIcon className="h-8" />
+                <Text fw="600" size={isSmallScreen ? 'sm' : 'md'}>
+                  {t('What can I help you with today?')}
+                </Text>
+              </Stack>
 
-        <Stack gap="sm">
-          {session.copilotId ? (
-            <Stack mx="md" gap="sm">
-              <Flex align="center" gap="sm">
-                <CopilotItem name={session.name || '新会话'} picUrl={session.picUrl} selected />
-                <ActionIcon
-                  size={32}
-                  radius={16}
-                  c="chatbox-tertiary"
-                  bg="#F1F3F5"
-                  onClick={() => setSession((old) => ({ ...old, copilotId: undefined }))}
-                >
-                  <IconX size={24} />
-                </ActionIcon>
-              </Flex>
+              {session.copilotId ? (
+                <Stack gap="sm" className="w-full">
+                  <Flex align="center" gap="sm" justify="center">
+                    <CopilotItem name={session.name || '新会话'} picUrl={session.picUrl} selected />
+                    <ActionIcon
+                      size={32}
+                      radius={16}
+                      c="chatbox-tertiary"
+                      bg="#F1F3F5"
+                      onClick={() => setSession((old) => ({ ...old, copilotId: undefined }))}
+                    >
+                      <IconX size={24} />
+                    </ActionIcon>
+                  </Flex>
 
-              <Text c="chatbox-secondary" className="line-clamp-5">
-                {session.messages[0]?.contentParts?.map((part) => (part.type === 'text' ? part.text : '')).join('') ||
-                  ''}
+                  <Text c="chatbox-secondary" className="line-clamp-5 text-center">
+                    {session.messages[0]?.contentParts
+                      ?.map((part) => (part.type === 'text' ? part.text : ''))
+                      .join('') || ''}
+                  </Text>
+                </Stack>
+              ) : (
+                <div className="w-full">
+                  <CopilotPicker onSelect={(copilot) => setSession((old) => ({ ...old, copilotId: copilot?.id }))} />
+                </div>
+              )}
+
+              <div className="w-full">
+                <InputBox
+                  sessionType="chat"
+                  sessionId="new"
+                  model={selectedModel}
+                  onSelectModel={(p, m) =>
+                    setSession((old) => ({
+                      ...old,
+                      settings: {
+                        ...(old.settings || {}),
+                        provider: p,
+                        modelId: m,
+                      },
+                    }))
+                  }
+                  onClickSessionSettings={async () => {
+                    const res: Session = await NiceModal.show('session-settings', {
+                      session,
+                      disableAutoSave: true,
+                    })
+                    if (res) {
+                      setSession((old) => ({
+                        ...old,
+                        ...res,
+                      }))
+                    }
+                    return true
+                  }}
+                  onSubmit={(payload) => {
+                    setHasInteracted(true)
+                    return handleSubmit(payload)
+                  }}
+                />
+              </div>
+            </Stack>
+          </div>
+        ) : (
+          // 提问后的布局（原始布局）
+          <>
+            <Stack align="center" justify="center" gap="sm" flex={1}>
+              <HomepageIcon className="h-8" />
+              <Text fw="600" size={isSmallScreen ? 'sm' : 'md'}>
+                {t('What can I help you with today?')}
               </Text>
             </Stack>
-          ) : (
-            <CopilotPicker onSelect={(copilot) => setSession((old) => ({ ...old, copilotId: copilot?.id }))} />
-          )}
 
-          <InputBox
-            sessionType="chat"
-            sessionId="new"
-            model={selectedModel}
-            onSelectModel={(p, m) =>
-              setSession((old) => ({
-                ...old,
-                settings: {
-                  ...(old.settings || {}),
-                  provider: p,
-                  modelId: m,
-                },
-              }))
-            }
-            onClickSessionSettings={async () => {
-              const res: Session = await NiceModal.show('session-settings', {
-                session,
-                disableAutoSave: true,
-              })
-              if (res) {
-                setSession((old) => ({
-                  ...old,
-                  ...res,
-                }))
-              }
-              return true
-            }}
-            onSubmit={handleSubmit}
-          />
-        </Stack>
+            <Stack gap="sm">
+              {session.copilotId ? (
+                <Stack mx="md" gap="sm">
+                  <Flex align="center" gap="sm">
+                    <CopilotItem name={session.name || '新会话'} picUrl={session.picUrl} selected />
+                    <ActionIcon
+                      size={32}
+                      radius={16}
+                      c="chatbox-tertiary"
+                      bg="#F1F3F5"
+                      onClick={() => setSession((old) => ({ ...old, copilotId: undefined }))}
+                    >
+                      <IconX size={24} />
+                    </ActionIcon>
+                  </Flex>
+
+                  <Text c="chatbox-secondary" className="line-clamp-5">
+                    {session.messages[0]?.contentParts
+                      ?.map((part) => (part.type === 'text' ? part.text : ''))
+                      .join('') || ''}
+                  </Text>
+                </Stack>
+              ) : (
+                <CopilotPicker onSelect={(copilot) => setSession((old) => ({ ...old, copilotId: copilot?.id }))} />
+              )}
+
+              <InputBox
+                sessionType="chat"
+                sessionId="new"
+                model={selectedModel}
+                onSelectModel={(p, m) =>
+                  setSession((old) => ({
+                    ...old,
+                    settings: {
+                      ...(old.settings || {}),
+                      provider: p,
+                      modelId: m,
+                    },
+                  }))
+                }
+                onClickSessionSettings={async () => {
+                  const res: Session = await NiceModal.show('session-settings', {
+                    session,
+                    disableAutoSave: true,
+                  })
+                  if (res) {
+                    setSession((old) => ({
+                      ...old,
+                      ...res,
+                    }))
+                  }
+                  return true
+                }}
+                onSubmit={handleSubmit}
+              />
+            </Stack>
+          </>
+        )}
       </div>
     </Page>
   )

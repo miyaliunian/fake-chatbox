@@ -368,7 +368,13 @@ const Message: FC<Props> = (props) => {
         },
       }}
     >
-      <Grid container wrap="nowrap" spacing={1.5}>
+      <Grid
+        container
+        wrap="nowrap"
+        spacing={1.5}
+        direction={msg.role === 'user' ? 'row-reverse' : 'row'}
+        justifyContent={msg.role === 'user' ? 'flex-end' : 'flex-start'}
+      >
         <Grid item>
           <Box className={cn(msg.role !== 'assistant' ? 'mt-1' : 'mt-2')}>
             {
@@ -486,14 +492,29 @@ const Message: FC<Props> = (props) => {
             }
           </Box>
         </Grid>
-        <Grid item xs sm container sx={{ width: '0px', paddingRight: '15px' }}>
-          <Grid item xs>
+        <Grid
+          item
+          xs
+          sm
+          container
+          sx={{
+            width: '0px',
+            paddingRight: msg.role === 'user' ? '0px' : '15px',
+            paddingLeft: msg.role === 'user' ? '15px' : '0px',
+          }}
+        >
+          <Grid item xs sx={{ textAlign: msg.role === 'user' ? 'right' : 'left' }}>
             <MessageStatuses statuses={msg.status} />
             <div
               className={cn(
                 'max-w-full inline-block',
-                msg.role !== 'assistant' ? 'bg-stone-400/10 dark:bg-blue-400/10 px-2 rounded ' : ''
+                msg.role !== 'assistant' ? 'bg-stone-400/10 dark:bg-blue-400/10 px-2 rounded ' : '',
+                msg.role === 'user' ? 'ml-auto' : ''
               )}
+              style={{
+                textAlign: msg.role === 'user' ? 'right' : 'left',
+                maxWidth: msg.role === 'user' ? '80%' : '100%',
+              }}
             >
               {msg.reasoningContent && (
                 <Box className="bg-stone-300/10 dark:bg-blue-300/10 rounded p-2 mb-2 ">
@@ -656,7 +677,13 @@ const Message: FC<Props> = (props) => {
               )}
             </div>
             {!hiddenButtonGroup && (
-              <Box sx={{ height: '35px' }}>
+              <Box
+                sx={{
+                  height: '35px',
+                  display: 'flex',
+                  justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start',
+                }}
+              >
                 {/* <Box sx={{ height: '35px' }} className='opacity-0 group-hover/message:opacity-100 delay-100 transition-all duration-100'> */}
                 <span
                   className={cn(

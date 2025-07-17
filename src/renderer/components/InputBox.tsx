@@ -426,7 +426,7 @@ const InputBox = forwardRef<InputBoxRef, InputBoxProps>(
       >
         <input className="hidden" {...getInputProps()} />
         <Stack
-          className="rounded-lg sm:rounded-md bg-[var(--mantine-color-chatbox-background-secondary-text)] border border-solid border-[var(--mantine-color-chatbox-border-primary-outline)]"
+          className="rounded-lg sm:rounded-md bg-white border border-solid border-[var(--mantine-color-chatbox-border-primary-outline)]"
           gap={0}
         >
           <Textarea
@@ -565,7 +565,7 @@ const InputBox = forwardRef<InputBoxRef, InputBoxProps>(
                     </ActionIcon>
                   </Tooltip>
 
-                  {featureFlags.mcp && (
+                  {/* {featureFlags.mcp && (
                     <MCPMenu>
                       {(enabledTools) =>
                         enabledTools > 0 ? (
@@ -582,7 +582,7 @@ const InputBox = forwardRef<InputBoxRef, InputBoxProps>(
                         )
                       }
                     </MCPMenu>
-                  )}
+                  )} */}
                 </>
               )}
 
