@@ -150,7 +150,7 @@ function Index() {
         {!hasInteracted ? (
           // 默认居中布局
           <div className="flex flex-col justify-center items-center h-full px-4 transition-all duration-300 ease-in-out">
-            <Stack align="center" justify="center" gap={isSmallScreen ? 'lg' : 'xl'} className="w-full max-w-2xl">
+            <Stack align="center" justify="center" gap={isSmallScreen ? 'lg' : 'xl'} className="w-full max-w-4xl">
               <Stack align="center" gap="sm">
                 <HomepageIcon className="h-8" />
                 <Text fw="600" size={isSmallScreen ? 'sm' : 'md'}>
@@ -187,6 +187,7 @@ function Index() {
 
               <div className="w-full">
                 <InputBox
+                  variant="centered"
                   sessionType="chat"
                   sessionId="new"
                   model={selectedModel}

@@ -147,7 +147,7 @@ function ProviderSettings({ providerId }: { providerId: string }) {
         setFetchedModels(
           modelList
             .reduce((pre, cur) => [...pre, ...cur.options], [] as ModelOptionGroup['options'])
-            .map((option) => ({ modelId: option.value }) as ProviderModelInfo)
+            .map((option) => ({ modelId: option.value } as ProviderModelInfo))
         )
       } else {
         add(t('Failed to fetch models'))
@@ -300,8 +300,8 @@ function ProviderSettings({ providerId }: { providerId: string }) {
                   !providerSettings?.apiKey
                     ? t('API Key is required to check connection')
                     : !checkModel
-                      ? t('Add at least one model to check connection')
-                      : null
+                    ? t('Add at least one model to check connection')
+                    : null
                 }
               >
                 <Button

@@ -69,6 +69,7 @@ export type InputBoxProps = {
   onStartNewThread?(): boolean
   onRollbackThread?(): boolean
   onClickSessionSettings?(): boolean | Promise<boolean>
+  variant?: 'default' | 'centered' // 新增变体支持
 }
 
 const InputBox = forwardRef<InputBoxRef, InputBoxProps>(
@@ -84,6 +85,7 @@ const InputBox = forwardRef<InputBoxRef, InputBoxProps>(
       onStartNewThread,
       onRollbackThread,
       onClickSessionSettings,
+      variant = 'default',
     },
     ref
   ) => {
@@ -418,31 +420,36 @@ const InputBox = forwardRef<InputBoxRef, InputBoxProps>(
 
     return (
       <Box
-        pt={isSmallScreen ? 0 : 'sm'}
-        pb={isSmallScreen ? 'md' : 'sm'}
-        px={isSmallScreen ? 'xs' : 'sm'}
+        pt={isSmallScreen ? 0 : variant === 'centered' ? 'lg' : 'sm'}
+        pb={isSmallScreen ? 'md' : variant === 'centered' ? 'lg' : 'sm'}
+        px={isSmallScreen ? 'xs' : variant === 'centered' ? 'xl' : 'sm'}
         id={dom.InputBoxID}
         {...getRootProps()}
       >
         <input className="hidden" {...getInputProps()} />
         <Stack
-          className="rounded-lg sm:rounded-md bg-white border border-solid border-[var(--mantine-color-chatbox-border-primary-outline)]"
+          className={`${
+            variant === 'centered'
+              ? 'rounded-2xl bg-white border-2 border-solid border-[var(--mantine-color-chatbox-border-primary-outline)] shadow-lg'
+              : 'rounded-lg sm:rounded-md bg-white border border-solid border-[var(--mantine-color-chatbox-border-primary-outline)]'
+          }`}
           gap={0}
         >
           <Textarea
             unstyled={true}
             classNames={{
-              input:
-                'block w-full outline-none border-none px-sm pt-sm pb-xs resize-none bg-transparent text-[var(--mantine-color-chatbox-primary-text)]',
+              input: `block w-full outline-none border-none resize-none bg-transparent text-[var(--mantine-color-chatbox-primary-text)] ${
+                variant === 'centered' ? 'px-lg pt-md pb-sm text-base' : 'px-sm pt-sm pb-xs'
+              }`,
             }}
-            size="sm"
+            size={variant === 'centered' ? 'md' : 'sm'}
             id={dom.messageInputID}
             ref={inputRef}
             placeholder={t('Type your question here...') || ''}
             bg="transparent"
             autosize={true}
-            minRows={1}
-            maxRows={Math.max(3, Math.floor(viewportHeight / 100))}
+            minRows={variant === 'centered' ? 2 : 1}
+            maxRows={Math.max(variant === 'centered' ? 4 : 3, Math.floor(viewportHeight / 100))}
             value={messageInput}
             autoFocus={!isSmallScreen}
             onChange={onMessageInput}
@@ -480,7 +487,13 @@ const InputBox = forwardRef<InputBoxRef, InputBoxProps>(
             </Flex>
           )}
 
-          <Flex px="sm" pb="sm" align="center" justify="space-between" gap="lg">
+          <Flex
+            px={variant === 'centered' ? 'lg' : 'sm'}
+            pb={variant === 'centered' ? 'md' : 'sm'}
+            align="center"
+            justify="space-between"
+            gap="lg"
+          >
             <Flex gap="md" flex="0 1 auto" className="!hidden sm:!flex">
               {showRollbackThreadButton ? (
                 <Tooltip label={t('Back to Previous')} withArrow position="top-start">
@@ -524,7 +537,7 @@ const InputBox = forwardRef<InputBoxRef, InputBoxProps>(
                   />
                   <Tooltip label={t('Attach Image')} withArrow position="top">
                     <ActionIcon variant="subtle" color="chatbox-secondary" onClick={onImageUploadClick}>
-                      <IconPhoto />
+                      <IconPhoto size={20} />
                     </ActionIcon>
                   </Tooltip>
 
@@ -561,7 +574,7 @@ const InputBox = forwardRef<InputBoxRef, InputBoxProps>(
                         dom.focusMessageInput()
                       }}
                     >
-                      <IconWorld />
+                      <IconWorld size={20} />
                     </ActionIcon>
                   </Tooltip>
 
@@ -593,7 +606,7 @@ const InputBox = forwardRef<InputBoxRef, InputBoxProps>(
                   disabled={!onClickSessionSettings}
                   onClick={onClickSessionSettings}
                 >
-                  <IconAdjustmentsHorizontal />
+                  <IconAdjustmentsHorizontal size={20} />
                 </ActionIcon>
               </Tooltip>
 
@@ -616,7 +629,7 @@ const InputBox = forwardRef<InputBoxRef, InputBoxProps>(
                         bd="none"
                         color="chatbox-secondary"
                       >
-                        <IconCirclePlus />
+                        <IconCirclePlus size={20} />
                       </ActionIcon>
                     </Menu.Target>
 
@@ -725,8 +738,8 @@ const InputBox = forwardRef<InputBoxRef, InputBoxProps>(
 
               <ActionIcon
                 disabled={disableSubmit && !generating}
-                radius={18}
-                size={isSmallScreen ? 28 : 36}
+                radius={variant === 'centered' ? 24 : 18}
+                size={variant === 'centered' ? (isSmallScreen ? 36 : 48) : isSmallScreen ? 28 : 36}
                 onClick={generating ? onStopGenerating : () => handleSubmit()}
                 className={
                   disableSubmit && !generating
@@ -734,7 +747,11 @@ const InputBox = forwardRef<InputBoxRef, InputBoxProps>(
                     : ''
                 }
               >
-                {generating ? <IconPlayerStopFilled size={20} /> : <IconArrowUp size={20} />}
+                {generating ? (
+                  <IconPlayerStopFilled size={variant === 'centered' ? 24 : 20} />
+                ) : (
+                  <IconArrowUp size={variant === 'centered' ? 24 : 20} />
+                )}
               </ActionIcon>
             </Flex>
           </Flex>
