@@ -228,8 +228,9 @@ function destroyTray() {
 // --------- 开发模式 ---------
 
 if (process.env.NODE_ENV === 'production') {
-  const sourceMapSupport = require('source-map-support')
-  sourceMapSupport.install()
+  // Note: Node.js 22+ has built-in source map support, so 'source-map-support' package is no longer needed
+  // const sourceMapSupport = require('source-map-support')
+  // sourceMapSupport.install()
 }
 
 const isDebug = process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true'
