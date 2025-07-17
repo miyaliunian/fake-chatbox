@@ -10,6 +10,42 @@
  */
 import { app, BrowserWindow, globalShortcut, ipcMain, Menu, nativeTheme, session, shell, Tray } from 'electron'
 import log from 'electron-log/main'
+
+// 创建安全的日志包装器以避免 EIO 错误
+const safeLog = {
+  info: (...args: any[]) => {
+    try {
+      log.info(...args)
+    } catch (error) {
+      // 如果 electron-log 失败，回退到 console
+      console.log('[INFO]', ...args)
+    }
+  },
+  error: (...args: any[]) => {
+    try {
+      log.error(...args)
+    } catch (error) {
+      // 如果 electron-log 失败，回退到 console
+      console.error('[ERROR]', ...args)
+    }
+  },
+  debug: (...args: any[]) => {
+    try {
+      log.debug(...args)
+    } catch (error) {
+      // 如果 electron-log 失败，回退到 console
+      console.debug('[DEBUG]', ...args)
+    }
+  },
+  warn: (...args: any[]) => {
+    try {
+      log.warn(...args)
+    } catch (error) {
+      // 如果 electron-log 失败，回退到 console
+      console.warn('[WARN]', ...args)
+    }
+  },
+}
 import { autoUpdater } from 'electron-updater'
 import os from 'os'
 import path from 'path'
@@ -121,7 +157,7 @@ function registerShortcuts(shortcutSetting?: ShortcutSetting) {
       globalShortcut.register(quickToggle, () => showOrHideWindow())
     }
   } catch (error) {
-    log.error('Failed to register shortcut [windowQuickToggle]:', error)
+    safeLog.error('Failed to register shortcut [windowQuickToggle]:', error)
   }
 }
 
@@ -164,28 +200,28 @@ function createTray() {
 
 function ensureTray() {
   if (tray) {
-    log.info('tray: already exists')
+    safeLog.info('tray: already exists')
     return tray
   }
   try {
     createTray()
-    log.info('tray: created')
+    safeLog.info('tray: created')
   } catch (e) {
-    log.error('tray: failed to create', e)
+    safeLog.error('tray: failed to create', e)
   }
 }
 
 function destroyTray() {
   if (!tray) {
-    log.info('tray: skip destroy because it does not exist')
+    safeLog.info('tray: skip destroy because it does not exist')
     return
   }
   try {
     tray.destroy()
     tray = null
-    log.info('tray: destroyed')
+    safeLog.info('tray: destroyed')
   } catch (e) {
-    log.error('tray: failed to destroy', e)
+    safeLog.error('tray: failed to destroy', e)
   }
 }
 
@@ -396,7 +432,7 @@ if (!gotTheLock) {
         try {
           unregisterShortcuts()
         } catch (e) {
-          log.error('shortcut: failed to unregister', e)
+          safeLog.error('shortcut: failed to unregister', e)
         }
         mcpIpc.closeAllTransports()
         destroyTray()
@@ -482,7 +518,7 @@ ipcMain.handle('relaunch', () => {
 ipcMain.handle('analysticTrackingEvent', (event, dataJson) => {
   const data = JSON.parse(dataJson)
   analystic.event(data.name, data.params).catch((e) => {
-    log.error('analystic_tracking_event', e)
+    safeLog.error('analystic_tracking_event', e)
   })
 })
 
@@ -508,19 +544,19 @@ ipcMain.handle('appLog', (event, dataJson) => {
   data.message = 'APP_LOG: ' + data.message
   switch (data.level) {
     case 'info':
-      log.info(data.message)
+      safeLog.info(data.message)
       break
     case 'error':
-      log.error(data.message)
+      safeLog.error(data.message)
       break
     default:
-      log.info(data.message)
+      safeLog.info(data.message)
   }
 })
 
 ipcMain.handle('ensureAutoLaunch', (event, enable: boolean) => {
   if (isDebug) {
-    log.info('ensureAutoLaunch: skip by debug mode')
+    safeLog.info('ensureAutoLaunch: skip by debug mode')
     return
   }
   return autoLauncher.ensure(enable)

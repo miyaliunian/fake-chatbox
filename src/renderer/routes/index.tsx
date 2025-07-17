@@ -153,7 +153,7 @@ function Index() {
             <Stack align="center" justify="center" gap={isSmallScreen ? 'lg' : 'xl'} className="w-full max-w-4xl">
               <Stack align="center" gap="sm">
                 <HomepageIcon className="h-8" />
-                <Text fw="600" size={isSmallScreen ? 'sm' : 'md'}>
+                <Text fw="600" size={isSmallScreen ? 'sm' : 'xl'}>
                   {t('What can I help you with today?')}
                 </Text>
               </Stack>

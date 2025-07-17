@@ -30,7 +30,12 @@ export function sliceTextWithEllipsis(text: string, maxLength: number) {
 
 export function getLogger(logId: string) {
   const logger = log.create({ logId })
-  logger.transports.console.format = '{h}:{i}:{s}.{ms} › [{logId}] › {text}'
+
+  // 禁用控制台传输以避免 EIO 错误
+  logger.transports.console.level = false
+
+  // 只保留文件传输
   logger.transports.file.format = '[{y}-{m}-{d} {h}:{i}:{s}.{ms}] [{level}] [{logId}] {text}'
+
   return logger
 }
