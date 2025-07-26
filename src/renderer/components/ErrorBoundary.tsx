@@ -1,5 +1,4 @@
 import React from 'react'
-import * as Sentry from '@sentry/react'
 import { getLogger } from '../lib/utils'
 
 const log = getLogger('ErrorBoundary')
@@ -36,20 +35,6 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     // Log error details
     log.error('ErrorBoundary caught an error:', error, errorInfo)
-
-    // Capture exception in Sentry with additional context
-    Sentry.withScope((scope) => {
-      scope.setTag('errorBoundary', true)
-      scope.setLevel('error')
-      scope.setContext('errorInfo', {
-        componentStack: errorInfo.componentStack,
-        errorBoundary: this.constructor.name,
-      })
-      Object.keys(errorInfo).forEach((key) => {
-        scope.setExtra(key, errorInfo[key as keyof React.ErrorInfo])
-      })
-      Sentry.captureException(error)
-    })
 
     this.setState({
       error,
@@ -155,20 +140,3 @@ function DefaultErrorFallback({ error, errorInfo, retry }: DefaultErrorFallbackP
     </div>
   )
 }
-
-// Sentry Error Boundary (alternative approach using Sentry's built-in ErrorBoundary)
-export const SentryErrorBoundary = Sentry.withErrorBoundary(
-  ({ children }: { children: React.ReactNode }) => <>{children}</>,
-  {
-    fallback: ({ error, resetError }) => <DefaultErrorFallback error={error} errorInfo={null} retry={resetError} />,
-    beforeCapture: (scope, error, errorInfo) => {
-      scope.setTag('errorBoundary', 'sentry')
-      scope.setLevel('error')
-      if (errorInfo) {
-        scope.setContext('errorInfo', {
-          componentStack: (errorInfo as any).componentStack || 'Unknown component stack',
-        })
-      }
-    },
-  }
-)

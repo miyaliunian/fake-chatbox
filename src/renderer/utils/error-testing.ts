@@ -32,12 +32,7 @@ export const errorTestingUtils = {
     }
   },
 
-  // Test Sentry directly
-  testSentryCapture: () => {
-    Sentry.captureMessage('Test Sentry message capture - this is intentional for testing', 'info')
-    Sentry.captureException(new Error('Test Sentry exception capture - this is intentional for testing'))
-    log.info('Sentry test messages sent')
-  },
+  
 
   // Test console error interception
   triggerConsoleError: () => {

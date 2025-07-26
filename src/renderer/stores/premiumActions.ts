@@ -48,7 +48,7 @@ export function useAutoValidate() {
           platform.appLog('info', `clear license validated data due to respones status: ${err.status}`)
         } else {
           // 其余情况可能是联网出现问题，不清除数据
-          Sentry.captureException(err)
+          
         }
       }
     })()

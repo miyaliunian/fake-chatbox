@@ -61,8 +61,7 @@ export async function migrateOnData(dataStore: MigrateStore, canRelaunch = true)
     return
   }
 
-  // const scope = Sentry.getCurrentScope()
-  // scope.setTag('configVersion', configVersion)
+  
   log.info(`migrateOnData: ${configVersion}, canRelaunch: ${canRelaunch}`)
 
   if (configVersion < 1) {

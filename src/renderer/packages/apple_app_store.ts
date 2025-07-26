@@ -25,7 +25,6 @@ export async function tryOpenAppStoreReviewPage() {
     NiceModal.show('app-store-rating')
   } catch (e) {
     console.error(e)
-    Sentry.captureException(e)
   }
 }
 

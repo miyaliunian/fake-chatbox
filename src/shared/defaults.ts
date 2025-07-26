@@ -90,7 +90,8 @@ export function settings(): Settings {
 
     defaultPrompt: getDefaultPrompt(),
 
-    allowReportingAndTracking: true,
+    // 关闭错误报错
+    allowReportingAndTracking: false,
 
     enableMarkdownRendering: true,
     enableLaTeXRendering: true,

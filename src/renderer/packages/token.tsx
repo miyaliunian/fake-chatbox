@@ -31,7 +31,6 @@ export function estimateTokensFromMessages(messages: Message[]) {
     ret += 3 // every reply is primed with <|start|>assistant<|message|>
     return ret
   } catch (e) {
-    Sentry.captureException(e)
     return -1
   }
 }

@@ -5,12 +5,12 @@ export function copyToClipboard(text: string) {
   try {
     navigator?.clipboard?.writeText(text)
   } catch (e) {
-    Sentry.captureException(e)
+    
   }
   try {
     copyToClipboardFallback(text)
   } catch (e) {
-    Sentry.captureException(e)
+    
   }
 }
 

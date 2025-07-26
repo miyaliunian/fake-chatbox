@@ -29,7 +29,6 @@ export function countWord(data: string): number {
     }
     return count
   } catch (e) {
-    Sentry.captureException(e)
     return -1
   }
 }

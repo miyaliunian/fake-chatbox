@@ -142,8 +142,8 @@ function RouteComponent() {
 
       <Divider />
 
-      {/* Error Reporting */}
-      <Stack gap="md">
+      {/* Error Reporting 暂时隐藏 */}
+      {/* <Stack gap="md">
         <Stack gap="xxs">
           <Title order={5}>{t('Error Reporting')}</Title>
           <Text c="chatbox-tertiary">
@@ -158,7 +158,7 @@ function RouteComponent() {
           checked={settings.allowReportingAndTracking}
           onChange={(e) => setSettings({ allowReportingAndTracking: e.target.checked })}
         />
-      </Stack>
+      </Stack> */}
 
       {/* others */}
       {platform.type === 'desktop' && (

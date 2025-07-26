@@ -1,5 +1,5 @@
 import { ModelOptionGroup, ModelProvider, ProviderBaseInfo, ProviderSettings, SessionType } from '../../../shared/types'
-import * as Sentry from '@sentry/react'
+
 import * as remote from '../../packages/remote'
 import { ModelSettingUtil } from './interface'
 
@@ -34,11 +34,9 @@ export default abstract class BaseConfig implements ModelSettingUtil {
     }))
     const [remoteModels, models] = await Promise.all([
       this.listRemoteProviderModels().catch((e) => {
-        Sentry.captureException(e)
         return []
       }),
       this.listProviderModels(providerSettings).catch((e) => {
-        Sentry.captureException(e)
         return []
       }),
     ])

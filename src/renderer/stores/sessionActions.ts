@@ -671,7 +671,7 @@ export async function submitNewUserMessage(params: {
         error instanceof AIProviderNoImplementedPaintError
       )
     ) {
-      Sentry.captureException(error) // unexpected error should be reported
+      
     }
     let errorCode: number | undefined
     if (error instanceof BaseError) {
@@ -848,7 +848,7 @@ export async function generate(sessionId: string, targetMsg: Message, options?: 
         error instanceof AIProviderNoImplementedPaintError
       )
     ) {
-      Sentry.captureException(error) // unexpected error should be reported
+      
     }
     let errorCode: number | undefined
     if (error instanceof BaseError) {
@@ -944,9 +944,7 @@ async function _generateName(sessionId: string, modifyName: (sessionId: string, 
     // name = name.slice(0, 10)    // 限制名字长度
     modifyName(session.id, name)
   } catch (e: unknown) {
-    if (!(e instanceof ApiError || e instanceof NetworkError)) {
-      Sentry.captureException(e) // unexpected error should be reported
-    }
+    
   }
 }
 
