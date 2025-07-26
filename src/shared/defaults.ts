@@ -108,7 +108,7 @@ export function settings(): Settings {
     startupPage: 'home' as const,
 
     autoLaunch: false,
-    autoUpdate: true,
+    autoUpdate: false,
     betaUpdate: false,
 
     shortcuts: {
