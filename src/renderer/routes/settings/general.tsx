@@ -135,12 +135,12 @@ function RouteComponent() {
         />
       </Stack>
 
-      <Divider />
+      {/* <Divider /> */}
 
-      {/* import and export data */}
-      <ImportExportDataSection />
+      {/* import and export data：数据备份与恢复 暂时隐藏 */}
+      {/* <ImportExportDataSection /> */}
 
-      <Divider />
+      {/* <Divider /> */}
 
       {/* Error Reporting 暂时隐藏 */}
       {/* <Stack gap="md">
@@ -175,7 +175,8 @@ function RouteComponent() {
                 })
               }
             />
-            <Switch
+            {/* 自动更新注释掉 */}
+            {/* <Switch
               label={t('Automatic updates')}
               checked={settings.autoUpdate}
               onChange={(e) =>
@@ -183,8 +184,9 @@ function RouteComponent() {
                   autoUpdate: e.currentTarget.checked,
                 })
               }
-            />
-            <Switch
+            /> */}
+            {/* 测试版更新注释掉 */}
+            {/* <Switch
               label={t('Beta updates')}
               checked={settings.betaUpdate}
               onChange={(e) =>
@@ -192,7 +194,7 @@ function RouteComponent() {
                   betaUpdate: e.currentTarget.checked,
                 })
               }
-            />
+            /> */}
           </Stack>
         </>
       )}
@@ -334,9 +336,9 @@ const ImportExportDataSection = () => {
         </Button>
       </Stack>
 
-      <Divider />
-
-      <Stack gap="lg">
+      {/* 数据恢复注释掉 */}
+      {/* <Divider /> */}
+      {/* <Stack gap="lg">
         <Stack gap="xxs">
           <Title order={5}>{t('Data Restore')}</Title>
           <Text c="chatbox-tertiary">
@@ -359,7 +361,7 @@ const ImportExportDataSection = () => {
             </Button>
           )}
         </FileButton>
-      </Stack>
+      </Stack> */}
     </>
   )
 }
