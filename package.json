@@ -62,7 +62,18 @@
     "@svgr/webpack": "8.0.1",
     "@tanstack/router-plugin": "1.128.0",
     "@teamsupercell/typings-for-css-modules-loader": "2.5.2",
-    
+    "@types/auto-launch": "5.0.5",
+    "@types/autosize": "4.0.3",
+    "@types/highlight.js": "10.1.0",
+    "@types/katex": "0.16.2",
+    "@types/lodash": "4.14.197",
+    "@types/mark.js": "8.11.12",
+    "@types/markdown-it": "12.2.3",
+    "@types/markdown-it-link-attributes": "3.0.1",
+    "@types/node": "20.2.5",
+    "@types/react": "18.2.8",
+    "@types/react-dom": "18.2.4",
+    "@types/react-syntax-highlighter": "15.5.9",
     "@types/shell-quote": "1.7.5",
     "@types/store": "2.0.2",
     "@types/terser-webpack-plugin": "5.0.4",
@@ -91,7 +102,6 @@
     "eslint-import-resolver-webpack": "0.13.2",
     "eslint-plugin-compat": "4.1.4",
     "eslint-plugin-import": "2.27.5",
-    
     "eslint-plugin-jsx-a11y": "6.7.1",
     "eslint-plugin-promise": "6.1.1",
     "eslint-plugin-react": "7.32.2",
@@ -101,9 +111,7 @@
     "html-webpack-plugin": "5.5.1",
     "husky": "9.0.11",
     "i18next-parser": "9.3.0",
-    
     "javascript-obfuscator": "4.0.2",
-    
     "mini-css-extract-plugin": "2.7.6",
     "node-loader": "2.0.0",
     "postcss": "8.5.3",
@@ -112,7 +120,6 @@
     "postcss-simple-vars": "7.0.1",
     "prettier": "2.8.8",
     "react-refresh": "0.14.0",
-    
     "rimraf": "5.0.1",
     "sass": "1.62.1",
     "sass-loader": "13.3.1",
@@ -120,7 +127,6 @@
     "tailwind-scrollbar": "3.1.0",
     "tailwindcss": "3.4.0",
     "terser-webpack-plugin": "5.3.9",
-    
     "ts-loader": "9.4.3",
     "ts-node": "10.9.1",
     "tsconfig-paths-webpack-plugin": "4.0.1",
@@ -171,7 +177,6 @@
     "@tanstack/react-query": "5.74.4",
     "@tanstack/react-router": "1.128.0",
     "@tanstack/router-devtools": "1.128.0",
-    
     "ai": "4.3.15",
     "auto-launch": "5.0.6",
     "autosize": "6.0.1",
