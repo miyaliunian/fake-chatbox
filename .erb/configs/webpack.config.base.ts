@@ -58,8 +58,8 @@ const configuration: webpack.Configuration = {
       USE_LOCAL_API: '',
       // Application Branding
       APP_DISPLAY_NAME: '算大师',
-      APP_PACKAGE_NAME: 'xyz.chatboxapp.ce',
-      APP_PRODUCT_NAME: 'xyz.chatboxapp.ce',
+      
+      APP_PRODUCT_NAME: 'xyz.suandashi.ce',
       // URLs and Domains
       APP_WEBSITE_URL: 'https://chatboxai.app',
       APP_API_URL: 'https://api.chatboxai.app',

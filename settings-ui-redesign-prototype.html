@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings Page Redesign - Prototype</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Simple transition for content panes */
+        .content-pane {
+            display: none;
+        }
+        .content-pane.active {
+            display: block;
+        }
+        /* Custom styles for toggle switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 24px;
+        }
+        .toggle-switch input { display: none; }
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .toggle-slider {
+            background-color: #3b82f6; /* blue-500 */
+        }
+        input:checked + .toggle-slider:before {
+            transform: translateX(16px);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden min-h-[600px]">
+            <div class="flex flex-col md:flex-row">
+
+                <!-- Left Side Navigation -->
+                <nav class="w-full md:w-64 bg-gray-50 border-r border-gray-200 p-4">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-6">Settings</h2>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#general" class="nav-link active flex items-center px-3 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 rounded-md">
+                                <!-- Icon Placeholder -->
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                <span>General</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#appearance" class="nav-link flex items-center px-3 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 rounded-md">
+                                <!-- Icon Placeholder -->
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"></path></svg>
+                                <span>Appearance</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#data" class="nav-link flex items-center px-3 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 rounded-md">
+                                <!-- Icon Placeholder -->
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4M4 7s0 0 0 0M12 15v4M12 3v4"></path></svg>
+                                <span>Data</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#hotkeys" class="nav-link flex items-center px-3 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 rounded-md">
+                                <!-- Icon Placeholder -->
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                                <span>Hotkeys</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Right Side Content -->
+                <main class="flex-1 p-6 md:p-8 overflow-y-auto">
+
+                    <!-- General Settings Pane -->
+                    <div id="general" class="content-pane active">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">General</h3>
+                        <p class="text-gray-600 mb-8">Configure the core behavior of the application.</p>
+
+                        <div class="space-y-6">
+                            <!-- Setting Item: Language -->
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <label class="font-semibold text-gray-800">Language</label>
+                                    <p class="text-sm text-gray-500">Choose the application language.</p>
+                                </div>
+                                <select class="w-48 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    <option>English</option>
+                                    <option selected>简体中文</option>
+                                    <option>日本語</option>
+                                </select>
+                            </div>
+
+                            <!-- Setting Item: Startup Page -->
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <label class="font-semibold text-gray-800">Startup Page</label>
+                                    <p class="text-sm text-gray-500">What to show when the app starts.</p>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <label class="flex items-center"><input type="radio" name="startup" class="mr-2" checked> Home Page</label>
+                                    <label class="flex items-center"><input type="radio" name="startup" class="mr-2"> Last Session</label>
+                                </div>
+                            </div>
+
+                            <!-- Setting Item: Auto Launch -->
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <label class="font-semibold text-gray-800">Launch at Startup</label>
+                                    <p class="text-sm text-gray-500">Automatically open Chatbox when you log in.</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <!-- Setting Item: Auto Updates -->
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <label class="font-semibold text-gray-800">Automatic Updates</label>
+                                    <p class="text-sm text-gray-500">Automatically download and install updates.</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Appearance Settings Pane -->
+                    <div id="appearance" class="content-pane">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Appearance</h3>
+                        <p class="text-gray-600 mb-8">Customize how the application looks and feels.</p>
+                        
+                        <div class="space-y-6">
+                            <!-- Setting Item: Theme -->
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <label class="font-semibold text-gray-800">Theme</label>
+                                    <p class="text-sm text-gray-500">Select a light, dark, or system-matching theme.</p>
+                                </div>
+                                <div class="flex space-x-2 p-1 bg-gray-200 rounded-md">
+                                    <button class="px-4 py-1 text-sm rounded-md bg-white shadow">Light</button>
+                                    <button class="px-4 py-1 text-sm rounded-md">Dark</button>
+                                    <button class="px-4 py-1 text-sm rounded-md">System</button>
+                                </div>
+                            </div>
+
+                            <!-- Setting Item: Font Size -->
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <label class="font-semibold text-gray-800">Font Size</label>
+                                    <p class="text-sm text-gray-500">Adjust the text size for readability.</p>
+                                </div>
+                                <div class="flex items-center w-48">
+                                    <input type="range" min="12" max="18" value="14" class="w-full">
+                                    <span class="ml-4 w-6 text-center">14</span>
+                                </div>
+                            </div>
+
+                             <!-- Setting Item: Disable Welcome -->
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <label class="font-semibold text-gray-800">Disable Welcome Screen</label>
+                                    <p class="text-sm text-gray-500">Don't show the welcome screen on startup.</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Settings Pane -->
+                    <div id="data" class="content-pane">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Data</h3>
+                        <p class="text-gray-600 mb-8">Manage your application data.</p>
+                        <div class="space-y-4">
+                            <button class="px-4 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600">Export Data</button>
+                            <button class="px-4 py-2 bg-gray-200 text-gray-800 font-semibold rounded-md hover:bg-gray-300">Import Data</button>
+                        </div>
+                    </div>
+
+                    <!-- Hotkeys Settings Pane -->
+                    <div id="hotkeys" class="content-pane">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Hotkeys</h3>
+                        <p class="text-gray-600 mb-8">Configure keyboard shortcuts.</p>
+                        <p class="text-gray-500">Hotkey settings will be displayed here...</p>
+                    </div>
+
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentPanes = document.querySelectorAll('.content-pane');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    // Deactivate all links and panes
+                    navLinks.forEach(l => l.classList.remove('active', 'bg-blue-50', 'text-blue-600'));
+                    contentPanes.forEach(p => p.classList.remove('active'));
+
+                    // Activate clicked link
+                    this.classList.add('active', 'bg-blue-50', 'text-blue-600');
+
+                    // Activate corresponding pane
+                    const targetId = this.getAttribute('href').substring(1);
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
+
+            // Initial state
+            document.querySelector('.nav-link[href="#general"]').click();
+        });
+    </script>
+
+</body>
+</html>

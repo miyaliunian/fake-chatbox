@@ -1,5 +1,5 @@
 productName: suandashi
-appId: xyz.chatboxapp.app
+appId: xyz.suandashi.app
 asar: true
 asarUnpack: "**\\*.{node,dll}"
 files:

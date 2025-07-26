@@ -21,8 +21,8 @@ export const ENV = {
   // Application Branding
   APP_NAME: getEnv('APP_NAME', '算大师')!,
   APP_DISPLAY_NAME: getEnv('APP_DISPLAY_NAME', '算大师')!,
-  APP_PACKAGE_NAME: getEnv('APP_PACKAGE_NAME', 'xyz.chatboxapp.ce')!,
-  APP_PRODUCT_NAME: getEnv('APP_PRODUCT_NAME', 'xyz.chatboxapp.ce')!,
+  APP_PACKAGE_NAME: getEnv('APP_PACKAGE_NAME', 'xyz.suandashi.ce')!,
+  APP_PRODUCT_NAME: getEnv('APP_PRODUCT_NAME', 'xyz.suandashi.ce')!,
 
   // URLs and Domains
   APP_WEBSITE_URL: getEnv('APP_WEBSITE_URL', 'https://chatboxai.app')!,

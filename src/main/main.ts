@@ -284,7 +284,7 @@ async function createWindow() {
     y: state.y,
     minWidth: windowState.minWidth,
     minHeight: windowState.minHeight,
-    icon: getAssetPath('icon.png'),
+    icon: getAssetPath('1024.png'),
     webPreferences: {
       spellcheck: true,
       webSecurity: false, // 其中一个作用是解决跨域问题

@@ -60,7 +60,7 @@ We regularly sync code from the pro repo to this repo, and vice versa.
 <a href='https://apps.apple.com/app/chatbox-ai/id6471368056' style='margin-right: 4px'>
 <img src='./doc/statics/app_store.webp' style="height:38px;" />
 </a>
-<a href='https://play.google.com/store/apps/details?id=xyz.chatboxapp.chatbox' style='margin-right: 4px'>
+<a href='https://play.google.com/store/apps/details?id=xyz.suandashi.chatbox' style='margin-right: 4px'>
 <img src='./doc/statics/google_play.png' style="height:38px;" />
 </a>
 <a href='https://chatboxai.app/install?download=android_apk' style='margin-right: 4px; display: inline-flex; justify-content: center'>
@@ -123,74 +123,74 @@ For more information: [chatboxai.app](https://chatboxai.app/)
 
 ## Features
 
--   **Local Data Storage**  
-    :floppy_disk: Your data remains on your device, ensuring it never gets lost and maintains your privacy.
+- **Local Data Storage**  
+  :floppy_disk: Your data remains on your device, ensuring it never gets lost and maintains your privacy.
 
--   **No-Deployment Installation Packages**  
-    :package: Get started quickly with downloadable installation packages. No complex setup necessary!
+- **No-Deployment Installation Packages**  
+  :package: Get started quickly with downloadable installation packages. No complex setup necessary!
 
--   **Support for Multiple LLM Providers**  
-    :gear: Seamlessly integrate with a variety of cutting-edge language models:
+- **Support for Multiple LLM Providers**  
+  :gear: Seamlessly integrate with a variety of cutting-edge language models:
 
-    -   OpenAI (ChatGPT)
-    -   Azure OpenAI
-    -   Claude
-    -   Google Gemini Pro
-    -   Ollama (enable access to local models like llama2, Mistral, Mixtral, codellama, vicuna, yi, and solar)
-    -   ChatGLM-6B
+  - OpenAI (ChatGPT)
+  - Azure OpenAI
+  - Claude
+  - Google Gemini Pro
+  - Ollama (enable access to local models like llama2, Mistral, Mixtral, codellama, vicuna, yi, and solar)
+  - ChatGLM-6B
 
--   **Image Generation with Dall-E-3**  
-    :art: Create the images of your imagination with Dall-E-3.
+- **Image Generation with Dall-E-3**  
+  :art: Create the images of your imagination with Dall-E-3.
 
--   **Enhanced Prompting**  
-    :speech_balloon: Advanced prompting features to refine and focus your queries for better responses.
+- **Enhanced Prompting**  
+  :speech_balloon: Advanced prompting features to refine and focus your queries for better responses.
 
--   **Keyboard Shortcuts**  
-    :keyboard: Stay productive with shortcuts that speed up your workflow.
+- **Keyboard Shortcuts**  
+  :keyboard: Stay productive with shortcuts that speed up your workflow.
 
--   **Markdown, Latex & Code Highlighting**  
-    :scroll: Generate messages with the full power of Markdown and Latex formatting, coupled with syntax highlighting for various programming languages, enhancing readability and presentation.
+- **Markdown, Latex & Code Highlighting**  
+  :scroll: Generate messages with the full power of Markdown and Latex formatting, coupled with syntax highlighting for various programming languages, enhancing readability and presentation.
 
--   **Prompt Library & Message Quoting**  
-    :books: Save and organize prompts for reuse, and quote messages for context in discussions.
+- **Prompt Library & Message Quoting**  
+  :books: Save and organize prompts for reuse, and quote messages for context in discussions.
 
--   **Streaming Reply**  
-    :arrow_forward: Provide rapid responses to your interactions with immediate, progressive replies.
+- **Streaming Reply**  
+  :arrow_forward: Provide rapid responses to your interactions with immediate, progressive replies.
 
--   **Ergonomic UI & Dark Theme**  
-    :new_moon: A user-friendly interface with a night mode option for reduced eye strain during extended use.
+- **Ergonomic UI & Dark Theme**  
+  :new_moon: A user-friendly interface with a night mode option for reduced eye strain during extended use.
 
--   **Team Collaboration**  
-    :busts_in_silhouette: Collaborate with ease and share OpenAI API resources among your team. [Learn More](./team-sharing/README.md)
+- **Team Collaboration**  
+  :busts_in_silhouette: Collaborate with ease and share OpenAI API resources among your team. [Learn More](./team-sharing/README.md)
 
--   **Cross-Platform Availability**  
-    :computer: Chatbox is ready for Windows, Mac, Linux users.
+- **Cross-Platform Availability**  
+  :computer: Chatbox is ready for Windows, Mac, Linux users.
 
--   **Access Anywhere with the Web Version**  
-    :globe_with_meridians: Use the web application on any device with a browser, anywhere.
+- **Access Anywhere with the Web Version**  
+  :globe_with_meridians: Use the web application on any device with a browser, anywhere.
 
--   **iOS & Android**  
-    :phone: Use the mobile applications that will bring this power to your fingertips on the go.
+- **iOS & Android**  
+  :phone: Use the mobile applications that will bring this power to your fingertips on the go.
 
--   **Multilingual Support**  
-    :earth_americas: Catering to a global audience by offering support in multiple languages:
+- **Multilingual Support**  
+  :earth_americas: Catering to a global audience by offering support in multiple languages:
 
-    -   English
-    -   简体中文 (Simplified Chinese)
-    -   繁體中文 (Traditional Chinese)
-    -   日本語 (Japanese)
-    -   한국어 (Korean)
-    -   Français (French)
-    -   Deutsch (German)
-    -   Русский (Russian)
-    -   Español (Spanish)
+  - English
+  - 简体中文 (Simplified Chinese)
+  - 繁體中文 (Traditional Chinese)
+  - 日本語 (Japanese)
+  - 한국어 (Korean)
+  - Français (French)
+  - Deutsch (German)
+  - Русский (Russian)
+  - Español (Spanish)
 
--   **And More...**  
-    :sparkles: Constantly enhancing the experience with new features!
+- **And More...**  
+  :sparkles: Constantly enhancing the experience with new features!
 
 ## FAQ
 
--   [Frequently Asked Questions](./doc/FAQ.md)
+- [Frequently Asked Questions](./doc/FAQ.md)
 
 ## Why I made Chatbox?
 
@@ -202,13 +202,13 @@ At first, I didn't know that it would be so popular. I listened to the feedback 
 
 Any form of contribution is welcome, including but not limited to:
 
--   Submitting issues
--   Submitting pull requests
--   Submitting feature requests
--   Submitting bug reports
--   Submitting documentation revisions
--   Submitting translations
--   Submitting any other forms of contribution
+- Submitting issues
+- Submitting pull requests
+- Submitting feature requests
+- Submitting bug reports
+- Submitting documentation revisions
+- Submitting translations
+- Submitting any other forms of contribution
 
 ## Build Instructions
 
