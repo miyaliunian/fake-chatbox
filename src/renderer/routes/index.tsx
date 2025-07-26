@@ -9,7 +9,8 @@ import { useTranslation } from 'react-i18next'
 import { type CopilotDetail, createMessage, type Session } from 'src/shared/types'
 import { v4 as uuidv4 } from 'uuid'
 import InputBox, { type InputBoxPayload } from '@/components/InputBox'
-import HomepageIcon from '@/components/icons/HomepageIcon'
+// import HomepageIcon from '@/components/icons/HomepageIcon'
+import HomepageIcon from '../static/1024.png'
 import Page from '@/components/Page'
 import { useMyCopilots, useRemoteCopilots } from '@/hooks/useCopilots'
 import { useIsSmallScreen } from '@/hooks/useScreenChange'
@@ -152,7 +153,8 @@ function Index() {
           <div className="flex flex-col justify-center items-center h-full px-4 transition-all duration-300 ease-in-out">
             <Stack align="center" justify="center" gap={isSmallScreen ? 'lg' : 'xl'} className="w-full max-w-4xl">
               <Stack align="center" gap="sm">
-                <HomepageIcon className="h-8" />
+                <img src={HomepageIcon} className="w-8 h-8 mr-2 align-middle inline-block" />
+                {/* <HomepageIcon className="h-8" /> */}
                 <Text fw="600" size={isSmallScreen ? 'sm' : 'xl'}>
                   {t('What can I help you with today?')}
                 </Text>
