@@ -136,11 +136,12 @@ export async function initSessionsIfNeeded() {
     return
   }
 
-  const newSessionList = await initPresetSessions()
+  // 不获取本地存储
+  // const newSessionList = await initPresetSessions()
 
-  // 同时写入 atom，避免后续被覆盖
-  const store = getDefaultStore()
-  store.set(atoms.sessionsListAtom, newSessionList)
+  // // 同时写入 atom，避免后续被覆盖
+  // const store = getDefaultStore()
+  // store.set(atoms.sessionsListAtom, newSessionList)
 }
 
 export function clearConversations(keepNum: number) {
