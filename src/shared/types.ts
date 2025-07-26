@@ -395,6 +395,8 @@ export interface Settings extends SessionSettings {
   betaUpdate: boolean // 是否自动检查 beta 更新
   shortcuts: ShortcutSetting
 
+  disableWelcomeOnStartup?: boolean // 是否在启动时禁用欢迎界面
+
   extension: ExtensionSettings
   mcp: MCPSettings
 }

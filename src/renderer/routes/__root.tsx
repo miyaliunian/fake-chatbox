@@ -68,7 +68,8 @@ function Root() {
           .catch(() => ({ setting_chatboxai_first: false } as RemoteConfig))
         setRemoteConfig((conf) => ({ ...conf, ...remoteConfig }))
         // 是否需要弹出设置窗口
-        if (settingActions.needEditSetting()) {
+        const settings = settingActions.getSettings()
+        if (settingActions.needEditSetting() && !settings.disableWelcomeOnStartup) {
           const res = await NiceModal.show('welcome')
           if (res) {
             if (res === 'custom') {

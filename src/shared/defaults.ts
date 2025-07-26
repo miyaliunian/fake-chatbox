@@ -102,6 +102,8 @@ export function settings(): Settings {
 
     autoGenerateTitle: true,
 
+    disableWelcomeOnStartup: true, // 默认禁用欢迎界面
+
     startupPage: 'home' as const,
 
     autoLaunch: false,

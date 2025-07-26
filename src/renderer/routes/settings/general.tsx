@@ -102,6 +102,20 @@ function RouteComponent() {
             </Flex>
           </Radio.Group>
         </Stack>
+
+        {/* Disable Welcome On Startup */}
+        <Stack>
+          <Text>{t('Disable welcome screen on startup')}</Text>
+          <Switch
+            label={t('Disable welcome screen on startup')}
+            checked={settings.disableWelcomeOnStartup}
+            onChange={(e) =>
+              setSettings({
+                disableWelcomeOnStartup: e.currentTarget.checked,
+              })
+            }
+          />
+        </Stack>
       </Stack>
 
       <Divider />
