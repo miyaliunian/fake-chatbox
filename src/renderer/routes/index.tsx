@@ -228,7 +228,7 @@ function Index() {
           // 提问后的布局（原始布局）
           <>
             <Stack align="center" justify="center" gap="sm" flex={1}>
-              <HomepageIcon className="h-8" />
+              <img src={HomepageIcon} className="h-8" />
               <Text fw="600" size={isSmallScreen ? 'sm' : 'md'}>
                 {t('What can I help you with today?')}
               </Text>
