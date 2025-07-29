@@ -1,4 +1,4 @@
-productName: suandashi
+productName: 算大师
 appId: xyz.suandashi.app
 asar: true
 asarUnpack: "**\\*.{node,dll}"
