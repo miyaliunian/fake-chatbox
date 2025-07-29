@@ -61,8 +61,12 @@ linux:
       arch:
         - x64
         - arm64
+  icon: assets/icons
   category: Development
   artifactName: ${productName}-${version}-${arch}.${ext}
+
+deb:
+  packageName: xyz.suandashi.app
 
 directories:
   app: release/app

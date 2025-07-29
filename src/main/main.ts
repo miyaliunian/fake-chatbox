@@ -176,6 +176,8 @@ function createTray() {
     // gm convert ./iconTemplateRaw.png -colorspace gray -negate -threshold 50% -resize 16x16 -units PixelsPerInch -density 72 iconTemplate.png
     // gm convert ./iconTemplateRaw.png -colorspace gray -negate -threshold 50% -resize 64x64 -units PixelsPerInch -density 144 iconTemplate@2x.png
     iconPath = getAssetPath('iconTemplate.png')
+  } else if (process.platform === 'linux') {
+    iconPath = getAssetPath('iconTemplate.png')
   } else if (process.platform === 'win32') {
     iconPath = getAssetPath('icon.ico')
   }
@@ -192,7 +194,7 @@ function createTray() {
       accelerator: 'Command+Q',
     },
   ])
-  tray.setToolTip('Chatbox')
+  tray.setToolTip('算大师')
   tray.setContextMenu(contextMenu)
   tray.on('double-click', showOrHideWindow)
   return tray
@@ -284,7 +286,7 @@ async function createWindow() {
     y: state.y,
     minWidth: windowState.minWidth,
     minHeight: windowState.minHeight,
-    icon: getAssetPath('1024.png'),
+    icon: getAssetPath('icon.png'),
     webPreferences: {
       spellcheck: true,
       webSecurity: false, // 其中一个作用是解决跨域问题
