@@ -167,11 +167,12 @@ export function pictureSessionSettings(): SessionSettings {
 }
 
 export const SystemProviders: ProviderBaseInfo[] = [
-  {
-    id: ModelProviderEnum.ChatboxAI,
-    name: 'Chatbox AI',
-    type: ModelProviderType.ChatboxAI,
-  },
+  // 原代码：已注释，过滤掉 ChatBox AI 提供方
+  // {
+  //   id: ModelProviderEnum.ChatboxAI,
+  //   name: 'Chatbox AI',
+  //   type: ModelProviderType.ChatboxAI,
+  // },
   {
     id: ModelProviderEnum.OpenAI,
     name: 'OpenAI',

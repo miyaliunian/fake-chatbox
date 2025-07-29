@@ -38,17 +38,31 @@ export const ModelSelector = forwardRef<HTMLDivElement, ModelSelectorProps>(
     const filteredProviders = useMemo(
       () =>
         providers.map((provider) => {
-          const models = (provider.models || provider.defaultSettings?.models)?.filter(
-            (model) =>
-              provider.id.includes(search) ||
-              provider.name.includes(search) ||
-              model.nickname?.includes(search) ||
-              model.modelId?.includes(search)
-          )
+          const models = (provider.models || provider.defaultSettings?.models)?.filter((model) => {
+            // 原代码：只有搜索过滤
+            // provider.id.includes(search) ||
+            // provider.name.includes(search) ||
+            // model.nickname?.includes(search) ||
+            // model.modelId?.includes(search)
+
+            // 过滤掉以 "Chatbox" 开头的模型（忽略大小写），但不影响自定义提供方
+            const isChatboxModel =
+              model.modelId?.toLowerCase().startsWith('chatbox') || model.nickname?.toLowerCase().startsWith('chatbox')
+            const shouldFilterChatboxModel = isChatboxModel && !provider.isCustom
+
+            // 搜索过滤 + 排除 Chatbox 模型
+            return (
+              (provider.id.includes(search) ||
+                provider.name.includes(search) ||
+                model.nickname?.includes(search) ||
+                model.modelId?.includes(search)) &&
+              !shouldFilterChatboxModel
+            )
+          })
           return {
             ...provider,
             models,
-          }
+          } as typeof provider
         }),
       [providers, search]
     )
@@ -70,26 +84,34 @@ export const ModelSelector = forwardRef<HTMLDivElement, ModelSelectorProps>(
     })
 
     const groups = filteredProviders.map((provider) => {
-      provider
-      const options = provider.models?.map((model) => {
-        const isFavorited = isFavoritedModel(provider.id, model.modelId)
+      const options = provider.models
+        ?.filter((model) => {
+          // 原代码：没有过滤
+          // 过滤掉以 "Chatbox" 开头的模型（忽略大小写），但不影响自定义提供方
+          const isChatboxModel =
+            model.modelId?.toLowerCase().startsWith('chatbox') || model.nickname?.toLowerCase().startsWith('chatbox')
+          const shouldFilterChatboxModel = isChatboxModel && !provider.isCustom
+          return !shouldFilterChatboxModel
+        })
+        ?.map((model) => {
+          const isFavorited = isFavoritedModel(provider.id, model.modelId)
 
-        return (
-          <ModelItem
-            key={`${provider.id}/${model.modelId}`}
-            providerId={provider.id}
-            model={model}
-            isFavorited={isFavorited}
-            onToggleFavorited={() => {
-              if (isFavorited) {
-                unfavoriteModel(provider.id, model.modelId)
-              } else {
-                favoriteModel(provider.id, model.modelId)
-              }
-            }}
-          />
-        )
-      })
+          return (
+            <ModelItem
+              key={`${provider.id}/${model.modelId}`}
+              providerId={provider.id}
+              model={model}
+              isFavorited={isFavorited}
+              onToggleFavorited={() => {
+                if (isFavorited) {
+                  unfavoriteModel(provider.id, model.modelId)
+                } else {
+                  favoriteModel(provider.id, model.modelId)
+                }
+              }}
+            />
+          )
+        })
 
       return (
         <Combobox.Group
@@ -196,24 +218,34 @@ export const ModelSelector = forwardRef<HTMLDivElement, ModelSelectorProps>(
                   </Text>
                 </Flex>
 
-                {favoritedModels.map((fm) => {
-                  return (
-                    <ModelItemInDrawer
-                      key={`${fm.provider?.id}/${fm.model?.modelId}`}
-                      providerId={fm.provider!.id}
-                      model={fm.model!}
-                      showIcon={true}
-                      isFavorited={true}
-                      onSelect={() => {
-                        handleOptionSubmit(`${fm.provider?.id}/${fm.model?.modelId}`)
-                        close()
-                      }}
-                      onToggleFavorited={() => {
-                        unfavoriteModel(fm.provider!.id, fm.model!.modelId)
-                      }}
-                    />
-                  )
-                })}
+                {favoritedModels
+                  ?.filter((fm) => {
+                    // 原代码：没有过滤
+                    // 过滤掉以 "Chatbox" 开头的模型（忽略大小写），但不影响自定义提供方
+                    const isChatboxModel =
+                      fm.model?.modelId?.toLowerCase().startsWith('chatbox') ||
+                      fm.model?.nickname?.toLowerCase().startsWith('chatbox')
+                    const shouldFilterChatboxModel = isChatboxModel && !fm.provider?.isCustom
+                    return !shouldFilterChatboxModel
+                  })
+                  ?.map((fm) => {
+                    return (
+                      <ModelItemInDrawer
+                        key={`${fm.provider?.id}/${fm.model?.modelId}`}
+                        providerId={fm.provider!.id}
+                        model={fm.model!}
+                        showIcon={true}
+                        isFavorited={true}
+                        onSelect={() => {
+                          handleOptionSubmit(`${fm.provider?.id}/${fm.model?.modelId}`)
+                          close()
+                        }}
+                        onToggleFavorited={() => {
+                          unfavoriteModel(fm.provider!.id, fm.model!.modelId)
+                        }}
+                      />
+                    )
+                  })}
               </Stack>
             )}
             {filteredProviders.map((provider) => (
@@ -309,18 +341,28 @@ export const ModelSelector = forwardRef<HTMLDivElement, ModelSelectorProps>(
                     </Flex>
                   }
                 >
-                  {favoritedModels?.map((fm) => (
-                    <ModelItem
-                      key={`${fm.provider?.id}/${fm.model?.modelId}`}
-                      showIcon={true}
-                      providerId={fm.provider!.id}
-                      model={fm.model!}
-                      isFavorited={true}
-                      onToggleFavorited={() => {
-                        unfavoriteModel(fm.provider!.id, fm.model!.modelId)
-                      }}
-                    />
-                  ))}
+                  {favoritedModels
+                    ?.filter((fm) => {
+                      // 原代码：没有过滤
+                      // 过滤掉以 "Chatbox" 开头的模型（忽略大小写），但不影响自定义提供方
+                      const isChatboxModel =
+                        fm.model?.modelId?.toLowerCase().startsWith('chatbox') ||
+                        fm.model?.nickname?.toLowerCase().startsWith('chatbox')
+                      const shouldFilterChatboxModel = isChatboxModel && !fm.provider?.isCustom
+                      return !shouldFilterChatboxModel
+                    })
+                    ?.map((fm) => (
+                      <ModelItem
+                        key={`${fm.provider?.id}/${fm.model?.modelId}`}
+                        showIcon={true}
+                        providerId={fm.provider!.id}
+                        model={fm.model!}
+                        isFavorited={true}
+                        onToggleFavorited={() => {
+                          unfavoriteModel(fm.provider!.id, fm.model!.modelId)
+                        }}
+                      />
+                    ))}
                 </Combobox.Group>
                 {groups}
               </>
