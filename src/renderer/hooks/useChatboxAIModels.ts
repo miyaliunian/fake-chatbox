@@ -2,7 +2,7 @@
  * @Author: 逗逗飞 wufei@strongdata.com.cn
  * @Date: 2025-07-16 11:16:27
  * @LastEditors: 逗逗飞 wufei@strongdata.com.cn
- * @LastEditTime: 2025-07-16 21:07:27
+ * @LastEditTime: 2025-07-30 07:24:23
  * @FilePath: /chatbox/src/renderer/hooks/useChatboxAIModels.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -48,17 +48,15 @@ const useChatboxAIModels = () => {
 
   const allChatboxAIModels = useMemo(
     () =>
-      data
-        ?.filter((m) => m.modelName.startsWith('DeepSeek'))
-        ?.map(
-          (item) =>
-            ({
-              modelId: item.modelId,
-              nickname: item.modelName,
-              labels: item.labels,
-            } as ProviderModelInfo)
-        ) || [],
-    [data?.filter((m) => m.modelName.startsWith('DeepSeek'))]
+      data?.map(
+        (item) =>
+          ({
+            modelId: item.modelId,
+            nickname: item.modelName,
+            labels: item.labels,
+          } as ProviderModelInfo)
+      ) || [],
+    [data]
   )
 
   const chatboxAIModels = useMemo(
