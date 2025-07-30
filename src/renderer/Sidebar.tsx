@@ -86,7 +86,7 @@ export default function Sidebar(props: {}) {
             <Box className={cn('flex title-bar items-center', needRoomForMacWindowControls ? 'pt-12' : 'pt-3')}></Box>
             <Box className={cn('flex justify-between items-center p-0 m-0 mx-2 mb-2')}>
               <Box className="title-bar">
-                <img src={icon} className="w-6 h-6 mr-2 align-middle inline-block" />
+                <img src={icon} className="w-6 h-6 mr-2 align-middle inline-block object-cover" />
                 {/* <span className="text-xl font-semibold align-middle inline-block opacity-75">Chatbox</span> */}
                 <span className="text-xl font-semibold align-middle inline-block opacity-75">{ENV.APP_NAME}</span>
               </Box>
