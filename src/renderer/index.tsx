@@ -85,7 +85,7 @@ function InitPage() {
           {migrationProcess ? `迁移中...(${migrationProcess})` : '启动中...'}
         </p> */}
       </div>
-      <div className="mt-4">
+      {/* <div className="mt-4">
         <div
           role="button"
           tabIndex={0}
@@ -100,7 +100,7 @@ function InitPage() {
         >
           {showLoadingLog ? 'Hide Loading Log' : 'Show Loading Log'}
         </div>
-      </div>
+      </div> */}
       {/* 倒叙展示，能够看到最新的日志 */}
       {/* {showLoadingLog && <pre className="whitespace-pre-wrap">{[...log].reverse().join('\n')}</pre>} */}
     </div>
