@@ -17,7 +17,7 @@ import {
 import SettingsIcon from '@mui/icons-material/Settings'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import { useTranslation } from 'react-i18next'
-import icon from './static/1024.png'
+import icon from './static/masterLogo.png'
 import SmartToyIcon from '@mui/icons-material/SmartToy'
 import AddIcon from '@mui/icons-material/AddCircleOutline'
 import useVersion from './hooks/useVersion'
@@ -86,9 +86,9 @@ export default function Sidebar(props: {}) {
             <Box className={cn('flex title-bar items-center', needRoomForMacWindowControls ? 'pt-12' : 'pt-3')}></Box>
             <Box className={cn('flex justify-between items-center p-0 m-0 mx-2 mb-2')}>
               <Box className="title-bar">
-                <img src={icon} className="w-6 h-6 mr-2 align-middle inline-block" />
+                <img src={icon} className="w-24 h-6 mr-2 align-middle inline-block object-contain" />
                 {/* <span className="text-xl font-semibold align-middle inline-block opacity-75">Chatbox</span> */}
-                <span className="text-xl font-semibold align-middle inline-block opacity-75">{ENV.APP_NAME}</span>
+                {/* <span className="text-xl font-semibold align-middle inline-block opacity-75">{ENV.APP_NAME}</span> */}
               </Box>
               <Box onClick={() => setShowSidebar(!showSidebar)}>
                 <IconButton
