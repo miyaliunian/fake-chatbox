@@ -173,187 +173,188 @@ export const SystemProviders: ProviderBaseInfo[] = [
   //   name: 'Chatbox AI',
   //   type: ModelProviderType.ChatboxAI,
   // },
-  {
-    id: ModelProviderEnum.OpenAI,
-    name: 'OpenAI',
-    type: ModelProviderType.OpenAI,
-    urls: {
-      website: 'https://openai.com',
-    },
-    defaultSettings: {
-      apiHost: 'https://api.openai.com',
-      // https://platform.openai.com/docs/models
-      models: [
-        {
-          modelId: 'gpt-4.1',
-          capabilities: ['vision', 'tool_use'],
-          contextWindow: 1_047_576,
-          maxOutput: 32_768,
-        },
-        {
-          modelId: 'gpt-4o',
-          capabilities: ['vision', 'tool_use'],
-          contextWindow: 128_000,
-          maxOutput: 4_096,
-        },
-        {
-          modelId: 'gpt-4o-mini',
-          capabilities: ['vision', 'tool_use'],
-          contextWindow: 128_000,
-          maxOutput: 4_096,
-        },
-        {
-          modelId: 'o4-mini',
-          capabilities: ['vision', 'tool_use', 'reasoning'],
-          contextWindow: 200_000,
-          maxOutput: 100_000,
-        },
-        {
-          modelId: 'o3-mini',
-          capabilities: ['vision', 'tool_use', 'reasoning'],
-          contextWindow: 200_000,
-          maxOutput: 200_000,
-        },
-        {
-          modelId: 'o1-mini',
-          capabilities: ['vision', 'tool_use', 'reasoning'],
-          contextWindow: 128_000,
-          maxOutput: 128_000,
-        },
-        {
-          modelId: 'o3',
-          capabilities: ['vision', 'tool_use', 'reasoning'],
-          contextWindow: 200_000,
-          maxOutput: 100_000,
-        },
-        {
-          modelId: 'o1',
-          capabilities: ['vision', 'tool_use', 'reasoning'],
-          contextWindow: 200_000,
-          maxOutput: 100_000,
-        },
-      ],
-    },
-  },
-  {
-    id: ModelProviderEnum.Claude,
-    name: 'Claude',
-    type: ModelProviderType.Claude,
-    urls: {
-      website: 'https://www.anthropic.com',
-    },
-    defaultSettings: {
-      apiHost: 'https://api.anthropic.com/v1',
-      // https://docs.anthropic.com/en/docs/about-claude/models/overview
-      models: [
-        {
-          modelId: 'claude-opus-4-0',
-          contextWindow: 200_000,
-          maxOutput: 32_000,
-          capabilities: ['vision', 'reasoning', 'tool_use'],
-        },
-        {
-          modelId: 'claude-sonnet-4-0',
-          contextWindow: 200_000,
-          maxOutput: 64_000,
-          capabilities: ['vision', 'reasoning', 'tool_use'],
-        },
-        {
-          modelId: 'claude-3-7-sonnet-latest',
-          capabilities: ['vision', 'tool_use', 'reasoning'],
-          contextWindow: 200_000,
-        },
-        {
-          modelId: 'claude-3-5-sonnet-latest',
-          capabilities: ['vision'],
-          contextWindow: 200_000,
-        },
-        {
-          modelId: 'claude-3-5-haiku-latest',
-          capabilities: ['vision'],
-          contextWindow: 200_000,
-        },
-        {
-          modelId: 'claude-3-opus-latest',
-          capabilities: ['vision'],
-          contextWindow: 200_000,
-        },
-      ],
-    },
-  },
-  {
-    id: ModelProviderEnum.Gemini,
-    name: 'Gemini',
-    type: ModelProviderType.Gemini,
-    urls: {
-      website: 'https://gemini.google.com/',
-    },
-    defaultSettings: {
-      apiHost: 'https://generativelanguage.googleapis.com',
-      // https://ai.google.dev/models/gemini
-      models: [
-        {
-          modelId: 'gemini-2.5-flash-preview-05-20',
-          capabilities: ['vision', 'reasoning'],
-        },
-        {
-          modelId: 'gemini-2.5-pro-preview-06-05',
-          capabilities: ['vision', 'reasoning'],
-        },
-        {
-          modelId: 'gemini-2.0-flash-exp',
-          capabilities: ['vision'],
-        },
-        {
-          modelId: 'gemini-2.0-flash-thinking-exp',
-          capabilities: ['vision', 'reasoning'],
-        },
-        {
-          modelId: 'gemini-2.0-flash-thinking-exp-1219',
-          capabilities: ['vision', 'reasoning'],
-        },
-        {
-          modelId: 'gemini-1.5-pro-latest',
-          capabilities: ['vision'],
-        },
-        {
-          modelId: 'gemini-1.5-flash-latest',
-          capabilities: ['vision'],
-        },
-        {
-          modelId: 'gemini-1.5-pro-exp-0827',
-          capabilities: ['vision'],
-        },
-        {
-          modelId: 'gemini-1.5-flash-exp-0827',
-          capabilities: ['vision'],
-        },
-        {
-          modelId: 'gemini-1.5-flash-8b-exp-0924',
-          capabilities: ['vision'],
-        },
-        {
-          modelId: 'gemini-pro',
-        },
-      ],
-    },
-  },
-  {
-    id: ModelProviderEnum.Ollama,
-    name: 'Ollama',
-    type: ModelProviderType.OpenAI,
-    defaultSettings: {
-      apiHost: 'http://127.0.0.1:11434',
-    },
-  },
-  {
-    id: ModelProviderEnum.LMStudio,
-    name: 'LM Studio',
-    type: ModelProviderType.OpenAI,
-    defaultSettings: {
-      apiHost: 'http://127.0.0.1:1234',
-    },
-  },
+  // {
+  //   id: ModelProviderEnum.OpenAI,
+  //   name: 'OpenAI',
+  //   type: ModelProviderType.OpenAI,
+  //   urls: {
+  //     website: 'https://openai.com',
+  //   },
+  //   defaultSettings: {
+  //     apiHost: 'https://api.openai.com',
+  //     // https://platform.openai.com/docs/models
+  //     models: [
+  //       {
+  //         modelId: 'gpt-4.1',
+  //         capabilities: ['vision', 'tool_use'],
+  //         contextWindow: 1_047_576,
+  //         maxOutput: 32_768,
+  //       },
+  //       {
+  //         modelId: 'gpt-4o',
+  //         capabilities: ['vision', 'tool_use'],
+  //         contextWindow: 128_000,
+  //         maxOutput: 4_096,
+  //       },
+  //       {
+  //         modelId: 'gpt-4o-mini',
+  //         capabilities: ['vision', 'tool_use'],
+  //         contextWindow: 128_000,
+  //         maxOutput: 4_096,
+  //       },
+  //       {
+  //         modelId: 'o4-mini',
+  //         capabilities: ['vision', 'tool_use', 'reasoning'],
+  //         contextWindow: 200_000,
+  //         maxOutput: 100_000,
+  //       },
+  //       {
+  //         modelId: 'o3-mini',
+  //         capabilities: ['vision', 'tool_use', 'reasoning'],
+  //         contextWindow: 200_000,
+  //         maxOutput: 200_000,
+  //       },
+  //       {
+  //         modelId: 'o1-mini',
+  //         capabilities: ['vision', 'tool_use', 'reasoning'],
+  //         contextWindow: 128_000,
+  //         maxOutput: 128_000,
+  //       },
+  //       {
+  //         modelId: 'o3',
+  //         capabilities: ['vision', 'tool_use', 'reasoning'],
+  //         contextWindow: 200_000,
+  //         maxOutput: 100_000,
+  //       },
+  //       {
+  //         modelId: 'o1',
+  //         capabilities: ['vision', 'tool_use', 'reasoning'],
+  //         contextWindow: 200_000,
+  //         maxOutput: 100_000,
+  //       },
+  //     ],
+  //   },
+  // },
+  // {
+  //   id: ModelProviderEnum.Claude,
+  //   name: 'Claude',
+  //   type: ModelProviderType.Claude,
+  //   urls: {
+  //     website: 'https://www.anthropic.com',
+  //   },
+  //   defaultSettings: {
+  //     apiHost: 'https://api.anthropic.com/v1',
+  //     // https://docs.anthropic.com/en/docs/about-claude/models/overview
+  //     models: [
+  //       {
+  //         modelId: 'claude-opus-4-0',
+  //         contextWindow: 200_000,
+  //         maxOutput: 32_000,
+  //         capabilities: ['vision', 'reasoning', 'tool_use'],
+  //       },
+  //       {
+  //         modelId: 'claude-sonnet-4-0',
+  //         contextWindow: 200_000,
+  //         maxOutput: 64_000,
+  //         capabilities: ['vision', 'reasoning', 'tool_use'],
+  //       },
+  //       {
+  //         modelId: 'claude-3-7-sonnet-latest',
+  //         capabilities: ['vision', 'tool_use', 'reasoning'],
+  //         contextWindow: 200_000,
+  //       },
+  //       {
+  //         modelId: 'claude-3-5-sonnet-latest',
+  //         capabilities: ['vision'],
+  //         contextWindow: 200_000,
+  //       },
+  //       {
+  //         modelId: 'claude-3-5-haiku-latest',
+  //         capabilities: ['vision'],
+  //         contextWindow: 200_000,
+  //       },
+  //       {
+  //         modelId: 'claude-3-opus-latest',
+  //         capabilities: ['vision'],
+  //         contextWindow: 200_000,
+  //       },
+  //     ],
+  //   },
+  // },
+  // {
+  //   id: ModelProviderEnum.Gemini,
+  //   name: 'Gemini',
+  //   type: ModelProviderType.Gemini,
+  //   urls: {
+  //     website: 'https://gemini.google.com/',
+  //   },
+  //   defaultSettings: {
+  //     apiHost: 'https://generativelanguage.googleapis.com',
+  //     // https://ai.google.dev/models/gemini
+  //     models: [
+  //       {
+  //         modelId: 'gemini-2.5-flash-preview-05-20',
+  //         capabilities: ['vision', 'reasoning'],
+  //       },
+  //       {
+  //         modelId: 'gemini-2.5-pro-preview-06-05',
+  //         capabilities: ['vision', 'reasoning'],
+  //       },
+  //       {
+  //         modelId: 'gemini-2.0-flash-exp',
+  //         capabilities: ['vision'],
+  //       },
+  //       {
+  //         modelId: 'gemini-2.0-flash-thinking-exp',
+  //         capabilities: ['vision', 'reasoning'],
+  //       },
+  //       {
+  //         modelId: 'gemini-2.0-flash-thinking-exp-1219',
+  //         capabilities: ['vision', 'reasoning'],
+  //       },
+  //       {
+  //         modelId: 'gemini-1.5-pro-latest',
+  //         capabilities: ['vision'],
+  //       },
+  //       {
+  //         modelId: 'gemini-1.5-flash-latest',
+  //         capabilities: ['vision'],
+  //       },
+  //       {
+  //         modelId: 'gemini-1.5-pro-exp-0827',
+  //         capabilities: ['vision'],
+  //       },
+  //       {
+  //         modelId: 'gemini-1.5-flash-exp-0827',
+  //         capabilities: ['vision'],
+  //       },
+  //       {
+  //         modelId: 'gemini-1.5-flash-8b-exp-0924',
+  //         capabilities: ['vision'],
+  //       },
+  //       {
+  //         modelId: 'gemini-pro',
+  //       },
+  //     ],
+  //   },
+  // },
+  // {
+  //   id: ModelProviderEnum.Ollama,
+  //   name: 'Ollama',
+  //   type: ModelProviderType.OpenAI,
+  //   defaultSettings: {
+  //     apiHost: 'http://127.0.0.1:11434',
+  //   },
+  // },
+  // {
+  //   id: ModelProviderEnum.LMStudio,
+  //   name: 'LM Studio',
+  //   type: ModelProviderType.OpenAI,
+  //   defaultSettings: {
+  //     apiHost: 'http://127.0.0.1:1234',
+  //   },
+  // },
+
   {
     id: ModelProviderEnum.DeepSeek,
     name: 'DeepSeek',
