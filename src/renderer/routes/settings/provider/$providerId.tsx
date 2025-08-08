@@ -172,6 +172,7 @@ function ProviderSettings({ providerId }: { providerId: string }) {
           ...settings,
           provider: providerId as any,
           modelId: checkModel,
+          ...providerSettings, // 合并用户的自定义设置，包括apiHost、apiPath等
         },
         configs
       )
