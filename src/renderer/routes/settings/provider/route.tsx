@@ -30,9 +30,7 @@ function RouteComponent() {
   const providerId = routerState.location.pathname.split('/')[3]
   const { settings, setSettings } = useSettings()
 
-  // const providers = useMemo(() => [...SystemProviders, ...(settings.customProviders || [])], [settings.customProviders])
-
-  const providers = useMemo(() => [...SystemProviders], [settings.customProviders])
+  const providers = useMemo(() => [...SystemProviders, ...(settings.customProviders || [])], [settings.customProviders])
 
   const { providers: availableProviders } = useProviders()
 
@@ -41,6 +39,7 @@ function RouteComponent() {
   const [newProviderMode] = useState(ModelProviderType.OpenAI)
 
   useEffect(() => {
+    // @ts-ignore
     if (routerState.location.search.custom) {
       setNewProviderModalOpened(true)
     }
