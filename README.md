@@ -2,7 +2,7 @@
  * @Author: 逗逗飞 wufei@strongdata.com.cn
  * @Date: 2025-07-29 13:04:54
  * @LastEditors: 逗逗飞 wufei@strongdata.com.cn
- * @LastEditTime: 2025-07-30 14:23:40
+ * @LastEditTime: 2025-08-11 13:39:24
  * @FilePath: /suandashi/README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -31,13 +31,7 @@ npm run package
 npm run package:linux
 ```
 
-5. Build the application, package the installer for all platforms
-
-```bash
-npm run package:all
-```
-
-6. Build the icons for app
+5. Build the icons for app
 
 ```bash
 pnpm  build:icons
