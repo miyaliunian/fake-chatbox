@@ -34,14 +34,13 @@ export default class MenuBuilder {
           click: () => this.mainWindow.webContents.replaceMisspelling(suggestion),
         })
       }
-      if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
-        items.push({
-          label: 'Inspect element',
-          click: () => {
-            this.mainWindow.webContents.inspectElement(x, y)
-          },
-        })
-      }
+      // Always allow inspect element in context menu
+      items.push({
+        label: 'Inspect element',
+        click: () => {
+          this.mainWindow.webContents.inspectElement(x, y)
+        },
+      })
       const { x, y } = props
       Menu.buildFromTemplate(items).popup({ window: this.mainWindow })
     })
@@ -147,13 +146,13 @@ export default class MenuBuilder {
         //     accelerator: 'Command+-',
         //     role: 'zoomOut',
         // },
-        // {
-        //   label: 'Toggle Developer Tools',
-        //   accelerator: 'Alt+Command+I',
-        //   click: () => {
-        //     this.mainWindow.webContents.toggleDevTools();
-        //   },
-        // },
+        {
+          label: 'Toggle Developer Tools',
+          accelerator: 'Alt+Command+I',
+          click: () => {
+            this.mainWindow.webContents.toggleDevTools()
+          },
+        },
       ],
     }
     const subMenuViewProd: MenuItemConstructorOptions = {
@@ -164,6 +163,13 @@ export default class MenuBuilder {
           accelerator: 'Ctrl+Command+F',
           click: () => {
             this.mainWindow.setFullScreen(!this.mainWindow.isFullScreen())
+          },
+        },
+        {
+          label: 'Toggle Developer Tools',
+          accelerator: 'Alt+Command+I',
+          click: () => {
+            this.mainWindow.webContents.toggleDevTools()
           },
         },
       ],
@@ -258,13 +264,13 @@ export default class MenuBuilder {
                     this.mainWindow.setFullScreen(!this.mainWindow.isFullScreen())
                   },
                 },
-                // {
-                //   label: 'Toggle &Developer Tools',
-                //   accelerator: 'Alt+Ctrl+I',
-                //   click: () => {
-                //     this.mainWindow.webContents.toggleDevTools();
-                //   },
-                // },
+                {
+                  label: 'Toggle &Developer Tools',
+                  accelerator: 'Alt+Ctrl+I',
+                  click: () => {
+                    this.mainWindow.webContents.toggleDevTools()
+                  },
+                },
               ]
             : [
                 {
@@ -272,6 +278,13 @@ export default class MenuBuilder {
                   accelerator: 'F11',
                   click: () => {
                     this.mainWindow.setFullScreen(!this.mainWindow.isFullScreen())
+                  },
+                },
+                {
+                  label: 'Toggle &Developer Tools',
+                  accelerator: 'Alt+Ctrl+I',
+                  click: () => {
+                    this.mainWindow.webContents.toggleDevTools()
                   },
                 },
               ],
