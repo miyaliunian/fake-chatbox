@@ -424,7 +424,8 @@ function ProviderSettings({ providerId }: { providerId: string }) {
               </Text>
             </Stack>
 
-            <Switch
+            {/* 注释掉 改善网络兼容性 滑块 等后续需要的时候 在打开 */}
+            {/* <Switch
               label={t('Improve Network Compatibility')}
               checked={providerSettings?.useProxy || false}
               onChange={(e) =>
@@ -438,7 +439,7 @@ function ProviderSettings({ providerId }: { providerId: string }) {
               <Text span fw="600" className=" whitespace-nowrap">
                 {t('Improve Network Compatibility')}
               </Text>
-            </Stack>
+            </Stack> */}
           </>
         )}
 
