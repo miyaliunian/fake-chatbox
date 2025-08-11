@@ -1,25 +1,35 @@
+/*
+ * @Author: 逗逗飞 wufei@strongdata.com.cn
+ * @Date: 2025-08-11 11:38:48
+ * @LastEditors: 逗逗飞 wufei@strongdata.com.cn
+ * @LastEditTime: 2025-08-11 11:45:19
+ * @FilePath: /suandashi/src/renderer/components/MessageErrTips.tsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import React from 'react'
 import Alert from '@mui/material/Alert'
-import { Trans } from 'react-i18next'
+// import { Trans } from 'react-i18next'
 import { Message } from '../../shared/types'
-import { aiProviderNameHash } from '../packages/models'
-import * as atoms from '../stores/atoms'
-import * as settingActions from '../stores/settingActions'
-import { useSetAtom } from 'jotai'
-import { Link } from '@mui/material'
-import { ChatboxAIAPIError } from '@/packages/models/errors'
-import platform from '@/platform'
-import { trackingEvent } from '@/packages/event'
-import LinkTargetBlank from './Link'
-import { useNavigate } from '@tanstack/react-router'
+// import { aiProviderNameHash } from '../packages/models'
+// import * as atoms from '../stores/atoms'
+// import * as settingActions from '../stores/settingActions'
+// import { useSetAtom } from 'jotai'
+// import { Link } from '@mui/material'
+// import { ChatboxAIAPIError } from '@/packages/models/errors'
+// import platform from '@/platform'
+// import { trackingEvent } from '@/packages/event'
+// import LinkTargetBlank from './Link'
+// import { useNavigate } from '@tanstack/react-router'
 
 export default function MessageErrTips(props: { msg: Message }) {
   const { msg } = props
-  const navigate = useNavigate()
-  const setOpenSettingDialogAtom = useSetAtom(atoms.openSettingDialogAtom)
+  // const navigate = useNavigate()
+  // const setOpenSettingDialogAtom = useSetAtom(atoms.openSettingDialogAtom)
   if (!msg.error) {
     return null
   }
+
+  // 获取错误信息，优先显示详细的响应体
   const errorMessage = msg.errorExtra?.responseBody
     ? (() => {
         try {
@@ -31,6 +41,8 @@ export default function MessageErrTips(props: { msg: Message }) {
       })()
     : msg.error
 
+  // 注释掉原有的tips逻辑
+  /*
   const tips: React.ReactNode[] = []
   let onlyShowTips = false // 是否只显示提示，不显示错误信息详情
   if (msg.error.startsWith('API Error')) {
@@ -168,8 +180,12 @@ export default function MessageErrTips(props: { msg: Message }) {
       />
     )
   }
+  */
+
   return (
     <Alert icon={false} severity="error" className="message-error-tips">
+      {/* 注释掉原有的tips显示逻辑 */}
+      {/*
       {tips.map((tip, i) => (
         <b key={i}>{tip}</b>
       ))}
@@ -182,6 +198,10 @@ export default function MessageErrTips(props: { msg: Message }) {
           <div className="text-sm whitespace-pre-wrap p-2 rounded-md bg-red-50 dark:bg-red-900/20">{errorMessage}</div>
         </>
       )}
+      */}
+
+      {/* 只显示具体的错误信息 */}
+      <div className="text-sm whitespace-pre-wrap p-2 rounded-md bg-red-50 dark:bg-red-900/20">{errorMessage}</div>
     </Alert>
   )
 }
