@@ -25,6 +25,8 @@ import SessionList from './components/SessionList'
 import * as sessionActions from './stores/sessionActions'
 import { useAtomValue, useAtom } from 'jotai'
 import * as atoms from './stores/atoms'
+import { sidebarWidthAtom } from './stores/atoms/uiAtoms'
+import ResizeHandle from './components/ResizeHandle'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate'
 import { useIsSmallScreen, useSidebarWidth } from './hooks/useScreenChange'
 import { trackingEvent } from './packages/event'
@@ -41,10 +43,13 @@ export default function Sidebar(props: {}) {
 
   const sessionListRef = useRef<HTMLDivElement>(null)
 
-  const sidebarWidth = useSidebarWidth()
-
-  // 小屏幕切换会话时隐藏侧边栏
+  // 小屏幕检测需要放在前面
   const isSmallScreen = useIsSmallScreen()
+
+  const defaultSidebarWidth = useSidebarWidth()
+  const [customSidebarWidth] = useAtom(sidebarWidthAtom)
+  // 在小屏幕上使用默认宽度，在大屏幕上使用用户自定义宽度
+  const sidebarWidth = isSmallScreen ? defaultSidebarWidth : customSidebarWidth
   useEffect(() => {
     if (isSmallScreen) {
       setShowSidebar(false)
@@ -70,12 +75,16 @@ export default function Sidebar(props: {}) {
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
             width: sidebarWidth,
+            overflowX: 'hidden', // 防止横向滚动条
           },
         }}
         SlideProps={undefined}
         PaperProps={undefined}
       >
-        <div className="ToolBar h-full">
+        <div className="ToolBar h-full relative overflow-hidden">
+          {/* 拖动调整手柄 - 仅在非小屏幕时显示 */}
+          {!isSmallScreen && <ResizeHandle minWidth={180} maxWidth={500} className="absolute top-0 right-0 z-10" />}
+
           <Stack
             // 在 Mac 上给窗口控制按钮留出空间, 更完善的话切换到全屏时不需要留空间，但需要监听全屏状态变化，暂时不考虑
             className={cn('pl-2 pr-1')}

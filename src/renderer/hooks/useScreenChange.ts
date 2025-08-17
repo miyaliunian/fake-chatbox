@@ -33,6 +33,8 @@ export function useSidebarWidth() {
   const md = useMediaQuery(theme.breakpoints.up('md'))
   const lg = useMediaQuery(theme.breakpoints.up('lg'))
   const xl = useMediaQuery(theme.breakpoints.up('xl'))
+
+  // 根据屏幕大小返回默认值，但这些值可以被用户拖动覆盖
   if (xl) {
     return 280
   } else if (lg) {
@@ -44,6 +46,12 @@ export function useSidebarWidth() {
   } else {
     return 240
   }
+}
+
+// 新的hook用于获取用户自定义的侧边栏宽度
+export function useCustomSidebarWidth() {
+  // 这个需要导入atom，我们稍后在需要的地方直接使用useAtomValue
+  return useSidebarWidth() // 暂时返回默认值，实际使用时会被替换
 }
 
 export function useInputBoxHeight(): { min: number; max: number } {

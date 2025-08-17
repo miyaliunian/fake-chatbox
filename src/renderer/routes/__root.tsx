@@ -11,7 +11,8 @@ import Toasts from '@/components/Toasts'
 import useAppTheme from '@/hooks/useAppTheme'
 import { useSystemLanguageWhenInit } from '@/hooks/useDefaultSystemLanguage'
 import { useI18nEffect } from '@/hooks/useI18nEffect'
-import useScreenChange, { useSidebarWidth } from '@/hooks/useScreenChange'
+import useScreenChange, { useSidebarWidth, useIsSmallScreen } from '@/hooks/useScreenChange'
+import { sidebarWidthAtom } from '@/stores/atoms/uiAtoms'
 import useShortcut from '@/hooks/useShortcut'
 import { getOS } from '@/packages/navigator'
 import * as remote from '@/packages/remote'
@@ -113,7 +114,11 @@ function Root() {
   }, [navigate, setOpenAboutDialog, setRemoteConfig])
 
   const [showSidebar] = useAtom(atoms.showSidebarAtom)
-  const sidebarWidth = useSidebarWidth()
+  const defaultSidebarWidth = useSidebarWidth()
+  const [customSidebarWidth] = useAtom(sidebarWidthAtom)
+  const isSmallScreen = useIsSmallScreen()
+  // 在小屏幕上使用默认宽度，在大屏幕上使用用户自定义宽度
+  const sidebarWidth = isSmallScreen ? defaultSidebarWidth : customSidebarWidth
 
   const _theme = useAtomValue(atoms.themeAtom)
   const { setColorScheme } = useMantineColorScheme()
