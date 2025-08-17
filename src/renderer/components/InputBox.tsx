@@ -722,7 +722,8 @@ const InputBox = forwardRef<InputBoxRef, InputBoxProps>(
                         />
                       </Flex>
                     ) : (
-                      <Flex align="center" className="cursor-pointer hover:bg-slate-400/25 rounded p-1">
+                      <Flex align="center" className="cursor-pointer hover:bg-slate-400/25 rounded p-1" gap="xs">
+                        {!!model && <ProviderImageIcon size={40} provider={model.provider} />}
                         <Text
                           span
                           c="chatbox-secondary"
