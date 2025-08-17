@@ -639,13 +639,13 @@ const InputBox = forwardRef<InputBoxRef, InputBoxProps>(
                       <Menu.Item leftSection={<IconPhoto size={16} />} onClick={onImageUploadClick}>
                         {t('Attach Image')}
                       </Menu.Item>
-                      <Menu.Item leftSection={<IconFolder size={16} />} onClick={onFileUploadClick}>
+                      {/* <Menu.Item leftSection={<IconFolder size={16} />} onClick={onFileUploadClick}>
                         {t('Select File')}
                       </Menu.Item>
 
                       <Menu.Item leftSection={<IconLink size={16} />} onClick={handleAttachLink}>
                         {t('Attach Link')}
-                      </Menu.Item>
+                      </Menu.Item> */}
                     </Menu.Dropdown>
                   </Menu>
 
