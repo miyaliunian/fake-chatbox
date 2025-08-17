@@ -162,8 +162,8 @@ const SessionSettingsModal = NiceModal.create(
                 editingData.type === 'picture'
                   ? theme.palette.secondary.main
                   : editingData.picUrl
-                    ? theme.palette.background.default
-                    : theme.palette.primary.main,
+                  ? theme.palette.background.default
+                  : theme.palette.primary.main,
             }}
           >
             {editingData.assistantAvatarKey ? (
@@ -585,7 +585,8 @@ export function ChatConfig({
           </Tooltip>
         </Flex>
 
-        <SliderWithInput value={settings?.topP} onChange={(v) => onSettingsChange({ topP: v })} max={2} />
+        {/* <SliderWithInput value={settings?.topP} onChange={(v) => onSettingsChange({ topP: v })} max={2} /> */}
+        <SliderWithInput value={settings?.topP ?? 0} onChange={(v) => onSettingsChange({ topP: v })} max={1} />
       </Stack>
 
       <Stack>
