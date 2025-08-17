@@ -521,7 +521,8 @@ function ProviderSettings({ providerId }: { providerId: string }) {
                 {t('Reset')}
               </Button>
 
-              <Button
+              {/* 模型是否可用 按钮隐藏掉 */}
+              {/* <Button
                 loading={fetchingModels}
                 variant="light"
                 color="chatbox-gray"
@@ -532,7 +533,7 @@ function ProviderSettings({ providerId }: { providerId: string }) {
                 leftSection={<IconRefresh size={12} />}
               >
                 {t('Fetch')}
-              </Button>
+              </Button> */}
             </Flex>
           </Flex>
 
